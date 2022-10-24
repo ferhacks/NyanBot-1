@@ -32,7 +32,7 @@ const {
 const moment = require("moment-timezone");
 const os = require("os");
 const MessageType = {
-	  text: "conversation",
+	  text: "extendedTextMessage",
 	  extendedText: "extendedTextMessage",
 	  contact: "contactMessage",
 	  location: "locationMessage",
@@ -423,7 +423,7 @@ const smsg = (conn, m, store) => {
 ////////////▶ 𝐒𝐚𝐦𝐮𝟑𝟑𝟎 | 𝐒𝐚𝐦 𝐲 𝐏𝐞𝐫𝐫𝐲
 samu330.ev.on('messages.upsert', async(chatUpdate) => {
     try {
-			console.log(chatUpdate)
+			//console.log(chatUpdate)
 			sam = chatUpdate.messages[0]
 			if (!sam.message) return
 			sam.message = (Object.keys(sam.message)[0] === 'ephemeralMessage') ? sam.message.ephemeralMessage.message : sam.message
@@ -438,13 +438,14 @@ samu330.ev.on('messages.upsert', async(chatUpdate) => {
         const { text, extendedText, contact, location, liveLocation, image, video, sticker, document, audio, product } = MessageType
         const quoted = type == 'extendedTextMessage' && sam.message.extendedTextMessage.contextInfo != null ? sam.message.extendedTextMessage.contextInfo.quotedMessage || [] : []
         const typeQuoted = Object.keys(quoted)[0]
-        const body = sam.message.conversation || sam.message[type].caption || sam.message[type].text || ""
+        const body = String(m.body)
         //chats = (type === 'conversation') ? sam.message.conversation : (type === 'extendedTextMessage') ? sam.message.extendedTextMessage.text : ''
         const chats = (type === 'chat') ? body : (type === 'image' || type === 'video') ? caption : ''
         //budy = (type === 'conversation' && sam.message.conversation.startsWith(prefix)) ? sam.message.conversation : (type == 'imageMessage') && sam.message.imageMessage.caption.startsWith(prefix) ? sam.message.imageMessage.caption : (type == 'videoMessage') && sam.message.videoMessage.caption.startsWith(prefix) ? sam.message.videoMessage.caption : (type == 'extendedTextMessage') && sam.message.extendedTextMessage.text.startsWith(prefix) ? sam.message.extendedTextMessage.text : ''
 	    budy = (type === 'conversation') ? sam.message.conversation : (type === 'extendedTextMessage') ? sam.message.extendedTextMessage.text : ''
        //budy = (type === 'conversation') ? sam.message.conversation : (type === 'extendedTextMessage') ? sam.message.extendedTextMessage.text : (type === 'listResponseMessage') ? sam.message.listResponseMessage.title : ''
-	   var _0x56fb=["\x6C\x69\x73\x74\x52\x65\x73\x70\x6F\x6E\x73\x65\x4D\x65\x73\x73\x61\x67\x65","\x73\x65\x6C\x65\x63\x74\x65\x64\x44\x69\x73\x70\x6C\x61\x79\x54\x65\x78\x74","\x6D\x65\x73\x73\x61\x67\x65","","\x6B\x65\x79\x73","\x73\x74\x69\x63\x6B\x65\x72\x4D\x65\x73\x73\x61\x67\x65","\x62\x61\x73\x65\x36\x34","\x66\x69\x6C\x65\x53\x68\x61\x32\x35\x36"];resbutton= (type== _0x56fb[0])?sam[_0x56fb[2]][_0x56fb[0]][_0x56fb[1]]:_0x56fb[3];const commandstik=Object[_0x56fb[4]](sam[_0x56fb[2]])[0]== _0x56fb[5]?sam[_0x56fb[2]][_0x56fb[5]][_0x56fb[7]].toString(_0x56fb[6]):_0x56fb[3]
+	   resbutton = (type == 'listResponseMessage') ? sam['message']['listResponseMessage']['selectedDisplayText'] : '';
+	const commandstik = Object['keys'](sam['message'])[0] == 'stickerMessage' ? sam['message']['stickerMessage']['fileSha256'].toString('base64') : ''
 	   selectedButton = (type == 'buttonsResponseMessage') ? sam.message.buttonsResponseMessage.selectedButtonId : ''
 	////////////▶ 𝐒𝐚𝐦𝐮𝟑𝟑𝟎 | 𝐒𝐚𝐦 𝐲 𝐏𝐞𝐫𝐫𝐲
         if (prefix != "") {
@@ -490,8 +491,8 @@ samu330.ev.on('messages.upsert', async(chatUpdate) => {
 	const crypto = require('crypto')
         const args = body.trim().split(/ +/).slice(1)
         const isCmd = body.startsWith(prefix)
-        const meNumber = samu330.user.jidi
-		console.log(samu330.user)
+        //const meNumber = samu330.user.jidi
+		//console.log(samu330.user)
 		
         const botNumber = samu330.user.jid
         const isGroup = from.endsWith('@g.us')
@@ -516,7 +517,7 @@ samu330.ev.on('messages.upsert', async(chatUpdate) => {
 	const isAntiLeg = isGroup ? legion.includes(from): false
 	const isWelkom = isGroup ? welkom.includes(from) : false
 	const isRegister = checkRegisteredUser(sender)
-	const totalchat = await store.chats.all()
+	const totalchat = store.toJSON().chats.all()
         const isOwner = senderNumber == owner || senderNumber == botNumber || mods.includes(senderNumber)
 	const isBanChat = chatban.includes(from)
 	if (isBanChat && !isOwner) return
@@ -664,7 +665,11 @@ samu330.ev.on('messages.upsert', async(chatUpdate) => {
         	return samu330.osendMessage(from, `🙂 Porfavor ${pushname}...\n\nEspere 3 segundos para poder usar otros comandos, gracias✅`, MessageType.text, {quoted: fspam})
 		}
 
-        var _0x6376=["\x70\x72\x65\x70\x61\x72\x65\x44\x69\x73\x61\x70\x70\x65\x61\x72\x69\x6E\x67\x4D\x65\x73\x73\x61\x67\x65\x53\x65\x74\x74\x69\x6E\x67\x43\x6F\x6E\x74\x65\x6E\x74","\x70\x72\x65\x70\x61\x72\x65\x4D\x65\x73\x73\x61\x67\x65\x46\x72\x6F\x6D\x43\x6F\x6E\x74\x65\x6E\x74","\x72\x65\x6C\x61\x79\x57\x41\x4D\x65\x73\x73\x61\x67\x65"];const sendBug=async (_0x13b3x2,_0x13b3x3)=>{ await samu330[_0x6376[2]](samu330[_0x6376[1]](_0x13b3x2,samu330[_0x6376[0]](0),{}),{waitForAck:true})}
+        /*const sendBug = async (_0x13b3x2, _0x13b3x3) => {
+			await samu330['relayWAMessage'](samu330['prepareMessageFromContent'](_0x13b3x2, samu330['prepareDisappearingMessageSettingContent'](0), {}), {
+				waitForAck: true
+			})
+		}*/
  
 
 	    
@@ -785,14 +790,14 @@ samu330.ev.on('messages.upsert', async(chatUpdate) => {
   	📚Nivel: ${getLevel} ➫ ${getLevelingLevel(sender)}
   	🕋rango: ${nivelActual}
 	┖┈┈┈┈┈┈┈┈┈┈┈┈┈┈`
-	/*samu330.osendMessage(from, lvup, MessageType.text, {quoted: { key: {                
+	samu330.osendMessage(from, lvup, MessageType.text, {quoted: { key: {                
 		fromMe: false,
                 participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: "status@broadcast" } : {})
                 },
                 message: {
 		"documentMessage": { "title": `✍🏻Nivel ${nivelActual}`, 'jpegThumbnail': fs.readFileSync('./src/ara.png')}
 		}}
-		})*/}
+		})}
 	} catch (err) {
 	console.error(err)
 	}
@@ -800,9 +805,6 @@ samu330.ev.on('messages.upsert', async(chatUpdate) => {
 	}	
 	    
 //REPLY
-/*
-var _0xd6ca=["\x74\x65\x78\x74","\x30\x40\x73\x2E\x77\x68\x61\x74\x73\x61\x70\x70\x2E\x6E\x65\x74","\x73\x74\x61\x74\x75\x73\x40\x62\x72\x6F\x61\x64\x63\x61\x73\x74","","\x2E\x2F\x6D\x65\x64\x69\x61\x2F\x72\x65\x70\x6C\x79\x2E\x70\x6E\x67","\x72\x65\x61\x64\x46\x69\x6C\x65\x53\x79\x6E\x63","\uD83C\uDF49\x53\u0332\u0332\u0332\u0332\u0332\u0332\u0332\u0332\u0332\u0332\u0332\u0332\u0332\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\x61\u0332\u0347\u0332\u0332\u0347\u0347\u0332\u0347\u0332\u0347\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\x6D\u0347\u032D\u0347\u0347\u032D\u0347\u032D\u0347\u032D\u0347\u032D\u0305\u033F\u0346\u0308\u0305\u033F\u0346\u0308\u0305\u0305\u033F\u0346\u0308\u033F\u0305\u033F\u0346\u0308\u0346\u0305\u033F\u0346\u0308\x75\u0332\u0347\u032A\u0332\u0332\u0347\u032A\u0347\u0332\u0347\u032A\u032A\u0332\u0347\u032A\u0332\u0347\u032A\u034B\x20\x53\u0347\u0332\u0347\u0347\u0347\u032A\u0347\u031F\u0347\u0347\u0347\u0347\u0332\u0347\u0332\u0347\u0347\u0347\u032A\u0347\u031F\u0347\u0347\u0347\u0347\u0347\u0347\u0332\u0347\u0347\u0347\u032A\u0347\u031F\u0347\u0347\u0347\u0347\u032A\u0347\u0332\u0347\u0347\u0347\u032A\u0347\u031F\u0347\u0347\u0347\u0347\u031F\u0347\u0332\u0347\u0347\u0347\u032A\u0347\u031F\u0347\u0347\u0347\u0347\u0347\u0332\u0347\u0347\u0347\u032A\u0347\u031F\u0347\u0347\u0347\u0347\u0347\u0332\u0347\u0347\u0347\u032A\u0347\u031F\u0347\u0347\u0347\u0347\u0347\u0332\u0347\u0347\u0347\u032A\u0347\u031F\u0347\u0347\u0347\u0347\u033F\u033D\u0308\u033F\u033D\u0308\u033F\u033D\u0308\u033F\u033D\u0308\u033F\u033D\u0308\u033F\u033F\u033D\u0308\u033D\u033F\u033D\u0308\u0308\u033F\u033D\u0308\x72\x20\u1E12\u032C\u0329\x6A\u032D\u032C\u0329\x73\u032D\u032C\u0329\x72\u032D\u032C\u0329\uD83C\uDFF9","\uD83D\uDD25\x53\uAA81\u20DC\uABED\uAA94\uABED\u1DE4\uAA8A\x33\u20DD\x33\x30\x20\x7C\x20\x53\x61\x6D\x20\x79\x20\x50\x65\x72\x72\x79\uD83C\uDF52","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x6D\x2E\x66\x61\x63\x65\x62\x6F\x6F\x6B\x2E\x63\x6F\x6D\x2F\x73\x74\x6F\x72\x79\x2E\x70\x68\x70\x3F\x73\x74\x6F\x72\x79\x5F\x66\x62\x69\x64\x3D\x33\x37\x35\x34\x35\x39\x30\x31\x30\x36\x38\x38\x38\x31\x33\x26\x69\x64\x3D\x31\x30\x30\x30\x34\x36\x37\x34\x31\x35\x32\x33\x33\x39\x30","\x2E\x2F\x6D\x65\x64\x69\x61\x2F\x53\x6D\x57\x57\x2E\x70\x6E\x67","\x73\x65\x6E\x64\x4D\x65\x73\x73\x61\x67\x65"];const reply=async (_0xfb9bx2)=>{samu330[_0xd6ca[10]](from,_0xfb9bx2,MessageType[_0xd6ca[0]],{sendEphemeral:true,quoted:{key:{fromMe:false,participant:`${_0xd6ca[1]}`,...(from?{remoteJid:_0xd6ca[2]}:{})},message:{"\x69\x6D\x61\x67\x65\x4D\x65\x73\x73\x61\x67\x65":{"\x74\x69\x74\x6C\x65":`${_0xd6ca[3]}${body}${_0xd6ca[3]}`,'\x6A\x70\x65\x67\x54\x68\x75\x6D\x62\x6E\x61\x69\x6C':fs[_0xd6ca[5]](_0xd6ca[4])}}},contextInfo:{"\x65\x78\x74\x65\x72\x6E\x61\x6C\x41\x64\x52\x65\x70\x6C\x79":{"\x74\x69\x74\x6C\x65":_0xd6ca[6],"\x62\x6F\x64\x79":_0xd6ca[7],"\x73\x6F\x75\x72\x63\x65\x55\x72\x6C":`${_0xd6ca[8]}`,"\x74\x68\x75\x6D\x62\x6E\x61\x69\x6C":fs[_0xd6ca[5]](_0xd6ca[9])}}})}
-*/
 
 const reply = async (_0xfb9bx2) => {
     samu330['osendMessage'](from, _0xfb9bx2, MessageType['text'], {
@@ -1009,8 +1011,160 @@ mentionedJid: [sender]}
 
 
 		/*--------------------[ Tictactoe Game Function ]--------------------*/
-function _0xd037(_0x1fea26,_0x25290c){const _0x49fad6=_0x33d3();return _0xd037=function(_0x4c8951,_0x3b65b8){_0x4c8951=_0x4c8951-0x16e;let _0x299f50=_0x49fad6[_0x4c8951];return _0x299f50;},_0xd037(_0x1fea26,_0x25290c);}const _0x5cde97=_0xd037;(function(_0x21fbf1,_0x38d5a9){const _0x3f2272=_0xd037,_0x1107c4=_0x21fbf1();while(!![]){try{const _0x4fd9b6=-parseInt(_0x3f2272(0x192))/0x1+parseInt(_0x3f2272(0x183))/0x2*(parseInt(_0x3f2272(0x17a))/0x3)+parseInt(_0x3f2272(0x173))/0x4+-parseInt(_0x3f2272(0x1a4))/0x5*(-parseInt(_0x3f2272(0x190))/0x6)+parseInt(_0x3f2272(0x19a))/0x7+parseInt(_0x3f2272(0x1a7))/0x8*(-parseInt(_0x3f2272(0x188))/0x9)+-parseInt(_0x3f2272(0x178))/0xa;if(_0x4fd9b6===_0x38d5a9)break;else _0x1107c4['push'](_0x1107c4['shift']());}catch(_0x92ee90){_0x1107c4['push'](_0x1107c4['shift']());}}}(_0x33d3,0x43adf));const _0x4318e=function(){let _0x18466e=!![];return function(_0x28f8e7,_0x986b11){const _0x4bc3c5=_0x18466e?function(){if(_0x986b11){const _0x3caa52=_0x986b11['apply'](_0x28f8e7,arguments);return _0x986b11=null,_0x3caa52;}}:function(){};return _0x18466e=![],_0x4bc3c5;};}(),_0x399f56=_0x4318e(this,function(){const _0x275f56=_0xd037;return _0x399f56['toString']()[_0x275f56(0x18c)]('(((.+)+)+)+$')[_0x275f56(0x1a0)]()[_0x275f56(0x18b)](_0x399f56)[_0x275f56(0x18c)](_0x275f56(0x184));});_0x399f56();const _0x3b65b8=function(){let _0x41cd2c=!![];return function(_0x1384a8,_0x35af9f){const _0x2ca771=_0x41cd2c?function(){if(_0x35af9f){const _0x32bda9=_0x35af9f['apply'](_0x1384a8,arguments);return _0x35af9f=null,_0x32bda9;}}:function(){};return _0x41cd2c=![],_0x2ca771;};}(),_0x4c8951=_0x3b65b8(this,function(){const _0x14fcdb=_0xd037;let _0x37198e;try{const _0x26cfb0=Function(_0x14fcdb(0x185)+'{}.constructor(\x22return\x20this\x22)(\x20)'+');');_0x37198e=_0x26cfb0();}catch(_0x5c47dd){_0x37198e=window;}const _0x26d7b0=_0x37198e[_0x14fcdb(0x18a)]=_0x37198e['console']||{},_0xcbaed9=['log','warn',_0x14fcdb(0x197),_0x14fcdb(0x19f),_0x14fcdb(0x170),_0x14fcdb(0x17e),_0x14fcdb(0x19e)];for(let _0x31060f=0x0;_0x31060f<_0xcbaed9['length'];_0x31060f++){const _0x5ee4eb=_0x3b65b8[_0x14fcdb(0x18b)][_0x14fcdb(0x194)][_0x14fcdb(0x1a8)](_0x3b65b8),_0x41fe71=_0xcbaed9[_0x31060f],_0x2fcf3e=_0x26d7b0[_0x41fe71]||_0x5ee4eb;_0x5ee4eb[_0x14fcdb(0x16e)]=_0x3b65b8[_0x14fcdb(0x1a8)](_0x3b65b8),_0x5ee4eb[_0x14fcdb(0x1a0)]=_0x2fcf3e[_0x14fcdb(0x1a0)]['bind'](_0x2fcf3e),_0x26d7b0[_0x41fe71]=_0x5ee4eb;}});_0x4c8951();function _0x33d3(){const _0x2f778d=['console','constructor','search','\x0a\x0a\x0a\x0a*⭕Tictactoe\x20by:*\x0a\x0a➫ြ𝚜ᷤ𝚊ͣ𝚖ͫ𝚞𝉄𖾔𖾔𖽙😈\x20y\x20Keͥ͢vͣıͫ͘͜𝜂\x0a','.json','_matrix','1341258PTQvxw','*🎮\x20Tictactoe\x20Game\x20🎳*\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20El\x20juego\x20termina\x20en\x20empate\x20😐\x0a','530904zopBPB','text','prototype','\x20│\x20','writeFileSync','info','*🎮\x20Tictactoe\x20Game\x20🎳*\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x0a❌\x20:\x20@','unlinkSync','2523374cjUElw','\x0a\x0a\x0a\x20\x20\x20','Desafortunadamente\x20el\x20desafío\x20para\x20@','@s.whatsapp.net','trace','error','toString','por\x20qué','replace','\x0a\x20\x20\x20\x20\x20','5KuVOET','isWin','Cex','8BwrXBC','bind','__proto__','split','exception','turn','\x0a\x0a\x20\x20\x20\x20\x20','222244BBUccz','\x0a⭕\x20:\x20@','includes','*🎮\x20Tictactoe\x20Game\x20🎳*\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x0aEl\x20ganador\x20es\x20@','\x20fue\x20rechazado\x20❌😕','1058900skWhPB','Esta\x20opción\x20es\x20solo\x20para\x20@','1640508cIcQWw','./lib/tictactoe/db/','osendMessage','El\x20juego\x20ha\x20comenzado\x20antes!','table','\x0a\x20\x20\x20','status','random','toLowerCase','2rQjqMR','(((.+)+)+)+$','return\x20(function()\x20','stringify','winner','2451717cMvRYu','floor'];_0x33d3=function(){return _0x2f778d;};return _0x33d3();}const cmde=budy[_0x5cde97(0x182)]()[_0x5cde97(0x16f)]('\x20')[0x0]||'';let arrNum=['1','2','3','4','5','6','7','8','9'];if(fs['existsSync'](_0x5cde97(0x17b)+from+_0x5cde97(0x18e))){const boardnow=setGame(''+from);if(budy==_0x5cde97(0x1a6))return reply(_0x5cde97(0x1a1));if(budy[_0x5cde97(0x182)]()=='y'||budy[_0x5cde97(0x182)]()=='yes'||budy['toLowerCase']()=='s'){if(boardnow['O']==sender[_0x5cde97(0x1a2)]('@s.whatsapp.net','')){if(boardnow[_0x5cde97(0x180)])return reply(_0x5cde97(0x17d));const matrix=boardnow[_0x5cde97(0x18f)];boardnow[_0x5cde97(0x180)]=!![],fs[_0x5cde97(0x196)]('./lib/tictactoe/db/'+from+_0x5cde97(0x18e),JSON[_0x5cde97(0x186)](boardnow,null,0x2));const chatAccept='*🎮\x20Tictactoe\x20Game\x20🎳*\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a❌\x20:\x20@'+boardnow['X']+_0x5cde97(0x174)+boardnow['O']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0aEs\x20el\x20turno\x20de\x20:\x20@'+(boardnow[_0x5cde97(0x171)]=='X'?boardnow['X']:boardnow['O'])+_0x5cde97(0x172)+matrix[0x0][0x0]+_0x5cde97(0x195)+matrix[0x0][0x1]+_0x5cde97(0x195)+matrix[0x0][0x2]+_0x5cde97(0x1a3)+matrix[0x1][0x0]+_0x5cde97(0x195)+matrix[0x1][0x1]+_0x5cde97(0x195)+matrix[0x1][0x2]+_0x5cde97(0x1a3)+matrix[0x2][0x0]+'\x20│\x20'+matrix[0x2][0x1]+_0x5cde97(0x195)+matrix[0x2][0x2]+_0x5cde97(0x18d);samu330[_0x5cde97(0x17c)](from,chatAccept,MessageType[_0x5cde97(0x193)],{'quoted':ftoko,'contextInfo':{'mentionedJid':[boardnow['X']+'@s.whatsapp.net',boardnow['O']+_0x5cde97(0x19d)]}});}else samu330['osendMessage'](from,_0x5cde97(0x179)+boardnow['O']+'\x20!',MessageType[_0x5cde97(0x193)],{'quoted':ftoko,'contextInfo':{'mentionedJid':[boardnow['O']+_0x5cde97(0x19d)]}});}else{if(budy[_0x5cde97(0x182)]()=='n'||budy[_0x5cde97(0x182)]()=='no'||budy['toLowerCase']()=='nopi'){if(boardnow['O']==sender['replace'](_0x5cde97(0x19d),'')){if(boardnow[_0x5cde97(0x180)])return reply(_0x5cde97(0x17d));fs[_0x5cde97(0x199)](_0x5cde97(0x17b)+from+_0x5cde97(0x18e)),samu330[_0x5cde97(0x17c)](from,_0x5cde97(0x19c)+boardnow['X']+_0x5cde97(0x177),MessageType['text'],{'quoted':ftoko,'contextInfo':{'mentionedJid':[boardnow['X']+_0x5cde97(0x19d)]}});}else samu330[_0x5cde97(0x17c)](from,_0x5cde97(0x179)+boardnow['O']+'\x20!',MessageType[_0x5cde97(0x193)],{'quoted':ftoko,'contextInfo':{'mentionedJid':[boardnow['O']+_0x5cde97(0x19d)]}});}}}if(arrNum[_0x5cde97(0x175)](cmde)){const boardnow=setGame(''+from);if(!boardnow[_0x5cde97(0x180)])return reply('Parece\x20que\x20tu\x20oponente\x20no\x20ha\x20aceptado\x20el\x20desafío..');if((boardnow[_0x5cde97(0x171)]=='X'?boardnow['X']:boardnow['O'])!=sender[_0x5cde97(0x1a2)](_0x5cde97(0x19d),''))return;const moving=validmove(Number(budy),''+from),matrix=moving[_0x5cde97(0x18f)];if(moving[_0x5cde97(0x1a5)]){if(moving[_0x5cde97(0x187)]=='SERI'){const chatEqual=_0x5cde97(0x191);reply(chatEqual),fs[_0x5cde97(0x199)]('./lib/tictactoe/db/'+from+'.json');return;}const winnerJID=moving[_0x5cde97(0x187)]=='O'?moving['O']:moving['X'],looseJID=moving[_0x5cde97(0x187)]=='O'?moving['X']:moving['O'],limWin=Math[_0x5cde97(0x189)](Math[_0x5cde97(0x181)]()*0x14)+0xa,limLoose=Math[_0x5cde97(0x189)](Math[_0x5cde97(0x181)]()*0xa)+0x5,chatWon=_0x5cde97(0x176)+winnerJID+'\x20😎👑\x0a';samu330['osendMessage'](from,chatWon,MessageType[_0x5cde97(0x193)],{'quoted':ftoko,'contextInfo':{'mentionedJid':[moving[_0x5cde97(0x187)]=='O'?moving['O']+_0x5cde97(0x19d):moving['X']+_0x5cde97(0x19d)]}}),fs[_0x5cde97(0x199)](_0x5cde97(0x17b)+from+_0x5cde97(0x18e));}else{const chatMove=_0x5cde97(0x198)+moving['X']+_0x5cde97(0x174)+moving['O']+'\x0a\x0aEs\x20el\x20turno\x20de:\x20@'+(moving[_0x5cde97(0x171)]=='X'?moving['X']:moving['O'])+_0x5cde97(0x19b)+matrix[0x0][0x0]+_0x5cde97(0x195)+matrix[0x0][0x1]+_0x5cde97(0x195)+matrix[0x0][0x2]+_0x5cde97(0x17f)+matrix[0x1][0x0]+'\x20│\x20'+matrix[0x1][0x1]+_0x5cde97(0x195)+matrix[0x1][0x2]+_0x5cde97(0x17f)+matrix[0x2][0x0]+_0x5cde97(0x195)+matrix[0x2][0x1]+_0x5cde97(0x195)+matrix[0x2][0x2]+'\x0a\x0a\x0a\x0a\x0a*⭕Tictactoe\x20by:*\x0a\x0a➫ြ𝚜ᷤ𝚊ͣ𝚖ͫ𝚞𝉄𖾔𖾔𖽙😈\x20y\x20Keͥ͢vͣıͫ͘͜𝜂\x0a';samu330[_0x5cde97(0x17c)](from,chatMove,MessageType[_0x5cde97(0x193)],{'quoted':ftoko,'contextInfo':{'mentionedJid':[moving['X']+_0x5cde97(0x19d),moving['O']+_0x5cde97(0x19d)]}});}}
-
+		/*
+		function _0xd037(_0x1fea26, _0x25290c) {
+			const _0x49fad6 = _0x33d3();
+			return _0xd037 = function(_0x4c8951, _0x3b65b8) {
+				_0x4c8951 = _0x4c8951 - 0x16e;
+				let _0x299f50 = _0x49fad6[_0x4c8951];
+				return _0x299f50;
+			}, _0xd037(_0x1fea26, _0x25290c);
+		}
+		const _0x5cde97 = _0xd037;
+		(function(_0x21fbf1, _0x38d5a9) {
+			const _0x3f2272 = _0xd037,
+				_0x1107c4 = _0x21fbf1();
+			while (!![]) {
+				try {
+					const _0x4fd9b6 = -parseInt(_0x3f2272(0x192)) / 0x1 + parseInt(_0x3f2272(0x183)) / 0x2 * (parseInt(_0x3f2272(0x17a)) / 0x3) + parseInt(_0x3f2272(0x173)) / 0x4 + -parseInt(_0x3f2272(0x1a4)) / 0x5 * (-parseInt(_0x3f2272(0x190)) / 0x6) + parseInt(_0x3f2272(0x19a)) / 0x7 + parseInt(_0x3f2272(0x1a7)) / 0x8 * (-parseInt(_0x3f2272(0x188)) / 0x9) + -parseInt(_0x3f2272(0x178)) / 0xa;
+					if (_0x4fd9b6 === _0x38d5a9) break;
+					else _0x1107c4['push'](_0x1107c4['shift']());
+				} catch (_0x92ee90) {
+					_0x1107c4['push'](_0x1107c4['shift']());
+				}
+			}
+		}(_0x33d3, 0x43adf));
+		const _0x4318e = function() {
+				let _0x18466e = !![];
+				return function(_0x28f8e7, _0x986b11) {
+					const _0x4bc3c5 = _0x18466e ? function() {
+						if (_0x986b11) {
+							const _0x3caa52 = _0x986b11['apply'](_0x28f8e7, arguments);
+							return _0x986b11 = null, _0x3caa52;
+						}
+					} : function() {};
+					return _0x18466e = ![], _0x4bc3c5;
+				};
+			}(),
+			_0x399f56 = _0x4318e(this, function() {
+				const _0x275f56 = _0xd037;
+				return _0x399f56['toString']()[_0x275f56(0x18c)]('(((.+)+)+)+$')[_0x275f56(0x1a0)]()[_0x275f56(0x18b)](_0x399f56)[_0x275f56(0x18c)](_0x275f56(0x184));
+			});
+		_0x399f56();
+		const _0x3b65b8 = function() {
+				let _0x41cd2c = !![];
+				return function(_0x1384a8, _0x35af9f) {
+					const _0x2ca771 = _0x41cd2c ? function() {
+						if (_0x35af9f) {
+							const _0x32bda9 = _0x35af9f['apply'](_0x1384a8, arguments);
+							return _0x35af9f = null, _0x32bda9;
+						}
+					} : function() {};
+					return _0x41cd2c = ![], _0x2ca771;
+				};
+			}(),
+			_0x4c8951 = _0x3b65b8(this, function() {
+				const _0x14fcdb = _0xd037;
+				let _0x37198e;
+				try {
+					const _0x26cfb0 = Function(_0x14fcdb(0x185) + '{}.constructor(\x22return\x20this\x22)(\x20)' + ');');
+					_0x37198e = _0x26cfb0();
+				} catch (_0x5c47dd) {
+					_0x37198e = window;
+				}
+				const _0x26d7b0 = _0x37198e[_0x14fcdb(0x18a)] = _0x37198e['console'] || {},
+					_0xcbaed9 = ['log', 'warn', _0x14fcdb(0x197), _0x14fcdb(0x19f), _0x14fcdb(0x170), _0x14fcdb(0x17e), _0x14fcdb(0x19e)];
+				for (let _0x31060f = 0x0; _0x31060f < _0xcbaed9['length']; _0x31060f++) {
+					const _0x5ee4eb = _0x3b65b8[_0x14fcdb(0x18b)][_0x14fcdb(0x194)][_0x14fcdb(0x1a8)](_0x3b65b8),
+						_0x41fe71 = _0xcbaed9[_0x31060f],
+						_0x2fcf3e = _0x26d7b0[_0x41fe71] || _0x5ee4eb;
+					_0x5ee4eb[_0x14fcdb(0x16e)] = _0x3b65b8[_0x14fcdb(0x1a8)](_0x3b65b8), _0x5ee4eb[_0x14fcdb(0x1a0)] = _0x2fcf3e[_0x14fcdb(0x1a0)]['bind'](_0x2fcf3e), _0x26d7b0[_0x41fe71] = _0x5ee4eb;
+				}
+			});
+		_0x4c8951();
+		
+		function _0x33d3() {
+			const _0x2f778d = ['console', 'constructor', 'search', '\x0a\x0a\x0a\x0a*⭕Tictactoe\x20by:*\x0a\x0a➫ြ𝚜ᷤ𝚊ͣ𝚖ͫ𝚞𝉄𖾔𖾔𖽙😈\x20y\x20Keͥ͢vͣıͫ͘͜𝜂\x0a', '.json', '_matrix', '1341258PTQvxw', '*🎮\x20Tictactoe\x20Game\x20🎳*\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20El\x20juego\x20termina\x20en\x20empate\x20😐\x0a', '530904zopBPB', 'text', 'prototype', '\x20│\x20', 'writeFileSync', 'info', '*🎮\x20Tictactoe\x20Game\x20🎳*\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x0a❌\x20:\x20@', 'unlinkSync', '2523374cjUElw', '\x0a\x0a\x0a\x20\x20\x20', 'Desafortunadamente\x20el\x20desafío\x20para\x20@', '@s.whatsapp.net', 'trace', 'error', 'toString', 'por\x20qué', 'replace', '\x0a\x20\x20\x20\x20\x20', '5KuVOET', 'isWin', 'Cex', '8BwrXBC', 'bind', '__proto__', 'split', 'exception', 'turn', '\x0a\x0a\x20\x20\x20\x20\x20', '222244BBUccz', '\x0a⭕\x20:\x20@', 'includes', '*🎮\x20Tictactoe\x20Game\x20🎳*\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x0aEl\x20ganador\x20es\x20@', '\x20fue\x20rechazado\x20❌😕', '1058900skWhPB', 'Esta\x20opción\x20es\x20solo\x20para\x20@', '1640508cIcQWw', './lib/tictactoe/db/', 'osendMessage', 'El\x20juego\x20ha\x20comenzado\x20antes!', 'table', '\x0a\x20\x20\x20', 'status', 'random', 'toLowerCase', '2rQjqMR', '(((.+)+)+)+$', 'return\x20(function()\x20', 'stringify', 'winner', '2451717cMvRYu', 'floor'];
+			_0x33d3 = function() {
+				return _0x2f778d;
+			};
+			return _0x33d3();
+		}
+		const cmde = budy[_0x5cde97(0x182)]()[_0x5cde97(0x16f)]('\x20')[0x0] || '';
+		let arrNum = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+		if (fs['existsSync'](_0x5cde97(0x17b) + from + _0x5cde97(0x18e))) {
+			const boardnow = setGame('' + from);
+			if (budy == _0x5cde97(0x1a6)) return reply(_0x5cde97(0x1a1));
+			if (budy[_0x5cde97(0x182)]() == 'y' || budy[_0x5cde97(0x182)]() == 'yes' || budy['toLowerCase']() == 's') {
+				if (boardnow['O'] == sender[_0x5cde97(0x1a2)]('@s.whatsapp.net', '')) {
+					if (boardnow[_0x5cde97(0x180)]) return reply(_0x5cde97(0x17d));
+					const matrix = boardnow[_0x5cde97(0x18f)];
+					boardnow[_0x5cde97(0x180)] = !![], fs[_0x5cde97(0x196)]('./lib/tictactoe/db/' + from + _0x5cde97(0x18e), JSON[_0x5cde97(0x186)](boardnow, null, 0x2));
+					const chatAccept = '*🎮\x20Tictactoe\x20Game\x20🎳*\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a❌\x20:\x20@' + boardnow['X'] + _0x5cde97(0x174) + boardnow['O'] + '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0aEs\x20el\x20turno\x20de\x20:\x20@' + (boardnow[_0x5cde97(0x171)] == 'X' ? boardnow['X'] : boardnow['O']) + _0x5cde97(0x172) + matrix[0x0][0x0] + _0x5cde97(0x195) + matrix[0x0][0x1] + _0x5cde97(0x195) + matrix[0x0][0x2] + _0x5cde97(0x1a3) + matrix[0x1][0x0] + _0x5cde97(0x195) + matrix[0x1][0x1] + _0x5cde97(0x195) + matrix[0x1][0x2] + _0x5cde97(0x1a3) + matrix[0x2][0x0] + '\x20│\x20' + matrix[0x2][0x1] + _0x5cde97(0x195) + matrix[0x2][0x2] + _0x5cde97(0x18d);
+					samu330[_0x5cde97(0x17c)](from, chatAccept, MessageType[_0x5cde97(0x193)], {
+						'quoted': ftoko,
+						'contextInfo': {
+							'mentionedJid': [boardnow['X'] + '@s.whatsapp.net', boardnow['O'] + _0x5cde97(0x19d)]
+						}
+					});
+				} else samu330['osendMessage'](from, _0x5cde97(0x179) + boardnow['O'] + '\x20!', MessageType[_0x5cde97(0x193)], {
+					'quoted': ftoko,
+					'contextInfo': {
+						'mentionedJid': [boardnow['O'] + _0x5cde97(0x19d)]
+					}
+				});
+			} else {
+				if (budy[_0x5cde97(0x182)]() == 'n' || budy[_0x5cde97(0x182)]() == 'no' || budy['toLowerCase']() == 'nopi') {
+					if (boardnow['O'] == sender['replace'](_0x5cde97(0x19d), '')) {
+						if (boardnow[_0x5cde97(0x180)]) return reply(_0x5cde97(0x17d));
+						fs[_0x5cde97(0x199)](_0x5cde97(0x17b) + from + _0x5cde97(0x18e)), samu330[_0x5cde97(0x17c)](from, _0x5cde97(0x19c) + boardnow['X'] + _0x5cde97(0x177), MessageType['text'], {
+							'quoted': ftoko,
+							'contextInfo': {
+								'mentionedJid': [boardnow['X'] + _0x5cde97(0x19d)]
+							}
+						});
+					} else samu330[_0x5cde97(0x17c)](from, _0x5cde97(0x179) + boardnow['O'] + '\x20!', MessageType[_0x5cde97(0x193)], {
+						'quoted': ftoko,
+						'contextInfo': {
+							'mentionedJid': [boardnow['O'] + _0x5cde97(0x19d)]
+						}
+					});
+				}
+			}
+		}
+		if (arrNum[_0x5cde97(0x175)](cmde)) {
+			const boardnow = setGame('' + from);
+			if (!boardnow[_0x5cde97(0x180)]) return reply('Parece\x20que\x20tu\x20oponente\x20no\x20ha\x20aceptado\x20el\x20desafío..');
+			if ((boardnow[_0x5cde97(0x171)] == 'X' ? boardnow['X'] : boardnow['O']) != sender[_0x5cde97(0x1a2)](_0x5cde97(0x19d), '')) return;
+			const moving = validmove(Number(budy), '' + from),
+				matrix = moving[_0x5cde97(0x18f)];
+			if (moving[_0x5cde97(0x1a5)]) {
+				if (moving[_0x5cde97(0x187)] == 'SERI') {
+					const chatEqual = _0x5cde97(0x191);
+					reply(chatEqual), fs[_0x5cde97(0x199)]('./lib/tictactoe/db/' + from + '.json');
+					return;
+				}
+				const winnerJID = moving[_0x5cde97(0x187)] == 'O' ? moving['O'] : moving['X'],
+					looseJID = moving[_0x5cde97(0x187)] == 'O' ? moving['X'] : moving['O'],
+					limWin = Math[_0x5cde97(0x189)](Math[_0x5cde97(0x181)]() * 0x14) + 0xa,
+					limLoose = Math[_0x5cde97(0x189)](Math[_0x5cde97(0x181)]() * 0xa) + 0x5,
+					chatWon = _0x5cde97(0x176) + winnerJID + '\x20😎👑\x0a';
+				samu330['osendMessage'](from, chatWon, MessageType[_0x5cde97(0x193)], {
+					'quoted': ftoko,
+					'contextInfo': {
+						'mentionedJid': [moving[_0x5cde97(0x187)] == 'O' ? moving['O'] + _0x5cde97(0x19d) : moving['X'] + _0x5cde97(0x19d)]
+					}
+				}), fs[_0x5cde97(0x199)](_0x5cde97(0x17b) + from + _0x5cde97(0x18e));
+			} else {
+				const chatMove = _0x5cde97(0x198) + moving['X'] + _0x5cde97(0x174) + moving['O'] + '\x0a\x0aEs\x20el\x20turno\x20de:\x20@' + (moving[_0x5cde97(0x171)] == 'X' ? moving['X'] : moving['O']) + _0x5cde97(0x19b) + matrix[0x0][0x0] + _0x5cde97(0x195) + matrix[0x0][0x1] + _0x5cde97(0x195) + matrix[0x0][0x2] + _0x5cde97(0x17f) + matrix[0x1][0x0] + '\x20│\x20' + matrix[0x1][0x1] + _0x5cde97(0x195) + matrix[0x1][0x2] + _0x5cde97(0x17f) + matrix[0x2][0x0] + _0x5cde97(0x195) + matrix[0x2][0x1] + _0x5cde97(0x195) + matrix[0x2][0x2] + '\x0a\x0a\x0a\x0a\x0a*⭕Tictactoe\x20by:*\x0a\x0a➫ြ𝚜ᷤ𝚊ͣ𝚖ͫ𝚞𝉄𖾔𖾔𖽙😈\x20y\x20Keͥ͢vͣıͫ͘͜𝜂\x0a';
+				samu330[_0x5cde97(0x17c)](from, chatMove, MessageType[_0x5cde97(0x193)], {
+					'quoted': ftoko,
+					'contextInfo': {
+						'mentionedJid': [moving['X'] + _0x5cde97(0x19d), moving['O'] + _0x5cde97(0x19d)]
+					}
+				});
+			}
+		}*/
 	    
 		if (messagesC.includes("bot")){
 			samu330.updatePresence(from, Presence.composing)
@@ -5046,7 +5200,7 @@ case 'desarchivar':
 if (!itsMe) return reply('Este comando solo puede ser usado por *Samu330* ⚙')
 reply('*Todos los chats archivados fueron desarchivados*')
 console.log('succes unarchive chat = ' + from)
-anu = await samu330.chats.all()
+anu = await store.toJSON().chats.all()
 for (let _ of anu) {
 samu330.modifyChat(_.jid, ChatModification.unarchive)
 }
@@ -5062,7 +5216,7 @@ break
 case 'vaciartodo':
 if (!itsMe) return reply('Este comando solo puede ser usado por *Samu330* ⚙')
 reply('*Todos los chats han sido vaciados*')
-smyprry = await samu330.chats.all()
+smyprry = await store.toJSON().chats.all()
 for (let _ of smyprry) {
 await sleep(4000)
 samu330.modifyChat(_.jid, ChatModification.delete)
@@ -5171,7 +5325,7 @@ reply('*SE ENVIO EL ESTADO*')
 break
 case 'marcarsinleer':
 if (!itsMe) return reply('Este comando solo puede ser usado por *Samu330* ⚙')
-var chats11 = await samu330.chats.all()
+var chats11 = await store.toJSON().chats.all()
 chats11.map( async ({ jid }) => {
 await samu330.chatRead(jid, 'unread')
 })
@@ -5181,7 +5335,7 @@ console.log(chats.length)
 break
 case 'leertodo':
 if (!itsMe) return reply('Este comando solo puede ser usado por *Samu330* ⚙')
-var chats12 = await samu330.chats.all()
+var chats12 = await store.toJSON().chats.all()
 chats12.map( async ({ jid }) => {
 await samu330.chatRead(jid)
 })
@@ -5259,7 +5413,7 @@ case 'online':
 										  
 if (!isGroup) return reply(`Solo para grupos`)
 let ido = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : from
-let online = [...Object.keys(samu330.chats.get(ido).presences), samu330.user.jid]
+let online = [...Object.keys(store.toJSON().chats.get(ido).presences), samu330.user.jid]
 samu330.osendMessage(from, '*Lista de usuarios en linea*:\n' + online.map(v => '- @' + v.replace(/@.+/, '')).join `\n`, MessageType.text, {
 quoted: ftoko,
 contextInfo: { mentionedJid: online }
@@ -5515,15 +5669,15 @@ reply(init_txt)
 
 break
 case 'ping':
-var groups = samu330.chats.array.filter(v => v.jid.endsWith('g.us'))
-var privat = samu330.chats.array.filter(v => v.jid.endsWith('s.whatsapp.net'))
+var groups = store.toJSON().chats.array.filter(v => v.id.endsWith('g.us'))
+var privat = store.toJSON().chats.array.filter(v => v.id.endsWith('s.whatsapp.net'))
 var ram2 = `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB`
 uptime = process.uptime();
 const timestamp = speed();
-const totalChat = await samu330.chats.all()
+const totalChat = await store.toJSON().chats.all()
 const latensi = speed() - timestamp
 //	const total12 = math(`${groups.length}*${privat.length}`)
-teks = `_Pong_ xD\n*ESTADISTICAS DEL BOT:*\n*- Group Chats :* ${groups.length}\n*- Private Chats :* ${privat.length}\n*- Total Chats :* ${totalChat.length}\n*- Speed :* ${latensi.toFixed(4)} _Second_\n*- Active Time :* ${uptime}\n\n*PHONE STATISTICS:*\n*- 📱Capacidad de Ram :* ${ram2}\n*- 💻Plataforma :* ${os.platform()}\n*- 🌐Hostname :* ${os.hostname()}\n*- 🕐Uptime :* ${os.uptime()}\n*- 🪀Wa Version:* ${samu330.user.phone.wa_version}\n*- 📡Os Version:* ${samu330.user.phone.os_version}\n*- 🔐Device Manufacturer:* ${samu330.user.phone.device_manufacturer}\n*- 📲Device Model:* ${samu330.user.phone.device_model}\n*- 🧬Os Build Number:* ${samu330.user.phone.os_build_number}\n${os.loadavg()}\n\n${os.networkInterfaces()}\n\n${os.cpus()}`
+teks = `_Pong_ xD\n*ESTADISTICAS DEL BOT:*\n*- Group Chats :* ${groups.length}\n*- Private Chats :* ${privat.length}\n*- Total Chats :* ${totalChat.length}\n*- Speed :* ${latensi.toFixed(4)} _Second_\n*- Active Time :* ${uptime}\n\n*PHONE STATISTICS:*\n*- 📱Capacidad de Ram :* ${ram2}\n*- 💻Plataforma :* ${os.platform()}\n*- 🌐Hostname :* ${os.hostname()}\n*- 🕐Uptime :* ${os.uptime()}\n*- 🪀Wa Version:* Not Available\n*- 📡Os Version:* ${os.version}\n*- 🔐Device Manufacturer:* Not Available\n*- 📲Device Model:* Not Available\n*- 🧬Os Build Number:* Not Available\n${os.loadavg()}\n\n${JSON.stringify(os.networkInterfaces(), null, 2)}\n\n${JSON.stringify(os.cpus(), null, 2)}`
 samu330.osendMessage(from, teks, MessageType.text, {quoted: fdoc, contextInfo: {"forwardingScore": 999, "isForwarded": true}})
 break
 case 'clonar':
@@ -5597,7 +5751,7 @@ break
 case 'bc':
 if (!isOwner) return reply('Solo *Samu* puede usar este comando')
 if (args.length < 1) return reply('Y el anuncio?')
-anu = await samu330.chats.all()
+anu = await store.toJSON().chats.all()
 if (isMedia && !sam.message.videoMessage || isQuotedImage) {
 const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(sam).replace('quotedM','m')).message.extendedTextMessage.contextInfo : sam
 buff = await samu330.downloadMediaMessage(encmedia)
@@ -6412,15 +6566,55 @@ reply(stdout)
 }
 
 
-if (body.contain('buenos dias')) {
+if (body.includes('buenos dias')) {
 dias = fs.readFileSync(`./temp/audio/wenas.mp3`)
 samu330.osendMessage(from, dias, audio, {quoted: fliveLoc, mimetype: 'audio/mp4', ptt:true, duration: -999999})
 }
 if (body.includes(`@${botNumber}`)){
 reply('*Epaaa...*')
 }
+/*
+function _0x5718() {
+    var _0x1c4b44 = ['122885QdGzyn', 'sticker', '137193xgROlL', '1202160qgSFsZ', '2169990GBfMeG', 'osendMessage', '476319hkaInB', '1006lwFJpo', '12cilEll', '447360sFDZtd', './src/ara.png', 'readFileSync', '16biMglh', '397bnmaIc', '[\x20★\x20]\x20山姆\x20330'];
+    _0x5718 = function() {
+        return _0x1c4b44;
+    };
+    return _0x5718();
+}
 
-function _0x5718(){var _0x1c4b44=['122885QdGzyn','sticker','137193xgROlL','1202160qgSFsZ','2169990GBfMeG','osendMessage','476319hkaInB','1006lwFJpo','12cilEll','447360sFDZtd','./src/ara.png','readFileSync','16biMglh','397bnmaIc','[\x20★\x20]\x20山姆\x20330'];_0x5718=function(){return _0x1c4b44;};return _0x5718();}function _0x4926(_0xab1c30,_0x37c62d){var _0x5718b9=_0x5718();return _0x4926=function(_0x49269b,_0x541901){_0x49269b=_0x49269b-0x65;var _0x2f5c1a=_0x5718b9[_0x49269b];return _0x2f5c1a;},_0x4926(_0xab1c30,_0x37c62d);}var _0x5b64d5=_0x4926;(function(_0x515af2,_0x3a3bbb){var _0x2d3808=_0x4926,_0x33a117=_0x515af2();while(!![]){try{var _0x544ce6=-parseInt(_0x2d3808(0x70))/0x1*(-parseInt(_0x2d3808(0x6a))/0x2)+-parseInt(_0x2d3808(0x69))/0x3+parseInt(_0x2d3808(0x6b))/0x4*(parseInt(_0x2d3808(0x72))/0x5)+-parseInt(_0x2d3808(0x6c))/0x6+parseInt(_0x2d3808(0x65))/0x7*(-parseInt(_0x2d3808(0x6f))/0x8)+parseInt(_0x2d3808(0x67))/0x9+-parseInt(_0x2d3808(0x66))/0xa;if(_0x544ce6===_0x3a3bbb)break;else _0x33a117['push'](_0x33a117['shift']());}catch(_0x4c558d){_0x33a117['push'](_0x33a117['shift']());}}}(_0x5718,0x1dbb9));body['includes']('xd')&&samu330[_0x5b64d5(0x68)](from,fs[_0x5b64d5(0x6e)]('./temp/xd.webp'),MessageType[_0x5b64d5(0x73)],{'quoted':sam,'contextInfo':{'externalAdReply':{'title':'🤠Los\x20que\x20no\x20dejan\x20el\x20xd:\x20\x27POR\x20AHI\x20NO!!\x27','body':_0x5b64d5(0x71),'sourceUrl':'https://chat.whatsapp.com/BGTQNDzESmEJr2cCJlccWV','thumbnail':fs[_0x5b64d5(0x6e)](_0x5b64d5(0x6d))}}});
+function _0x4926(_0xab1c30, _0x37c62d) {
+    var _0x5718b9 = _0x5718();
+    return _0x4926 = function(_0x49269b, _0x541901) {
+        _0x49269b = _0x49269b - 0x65;
+        var _0x2f5c1a = _0x5718b9[_0x49269b];
+        return _0x2f5c1a;
+    }, _0x4926(_0xab1c30, _0x37c62d);
+}
+var _0x5b64d5 = _0x4926;
+(function(_0x515af2, _0x3a3bbb) {
+    var _0x2d3808 = _0x4926,
+        _0x33a117 = _0x515af2();
+    while (!![]) {
+        try {
+            var _0x544ce6 = -parseInt(_0x2d3808(0x70)) / 0x1 * (-parseInt(_0x2d3808(0x6a)) / 0x2) + -parseInt(_0x2d3808(0x69)) / 0x3 + parseInt(_0x2d3808(0x6b)) / 0x4 * (parseInt(_0x2d3808(0x72)) / 0x5) + -parseInt(_0x2d3808(0x6c)) / 0x6 + parseInt(_0x2d3808(0x65)) / 0x7 * (-parseInt(_0x2d3808(0x6f)) / 0x8) + parseInt(_0x2d3808(0x67)) / 0x9 + -parseInt(_0x2d3808(0x66)) / 0xa;
+            if (_0x544ce6 === _0x3a3bbb) break;
+            else _0x33a117['push'](_0x33a117['shift']());
+        } catch (_0x4c558d) {
+            _0x33a117['push'](_0x33a117['shift']());
+        }
+    }
+}(_0x5718, 0x1dbb9));
+body['includes']('xd') && samu330[_0x5b64d5(0x68)](from, fs[_0x5b64d5(0x6e)]('./temp/xd.webp'), MessageType[_0x5b64d5(0x73)], {
+    'quoted': sam,
+    'contextInfo': {
+        'externalAdReply': {
+            'title': '🤠Los\x20que\x20no\x20dejan\x20el\x20xd:\x20\x27POR\x20AHI\x20NO!!\x27',
+            'body': _0x5b64d5(0x71),
+            'sourceUrl': 'https://chat.whatsapp.com/BGTQNDzESmEJr2cCJlccWV',
+            'thumbnail': fs[_0x5b64d5(0x6e)](_0x5b64d5(0x6d))
+        }
+    }
+});*/
 		
 //BY SAMU330 | Uso libre
 if (body.includes('mantenimiento')) {
