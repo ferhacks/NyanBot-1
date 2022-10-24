@@ -5,8 +5,8 @@
 //   creditos:
 //   _MankBarBar & Samu & LolHuman_ & Aiden
 //============ Samu330 ============\\
-
 (async() => {
+	process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 const { 
   WAConnection,
   getContentType, 
@@ -495,7 +495,7 @@ samu330.ev.on('messages.upsert', async(chatUpdate) => {
         hit_today.push(command)
 	const chats1 = (type === 'chat') ? body : ((type === 'image' || type === 'video')) ? caption : ''
 	const samu = '```'
-    m = simple.smsg(samu330, sam)
+    //m = simple.smsg(samu330, sam)
 	const otherBot = m.isBaileys
 	const crypto = require('crypto')
         const args = body.trim().split(/ +/).slice(1)
@@ -564,7 +564,7 @@ samu330.ev.on('messages.upsert', async(chatUpdate) => {
 
     const katalog = (teks) => {
         res = samu330.prepareMessageFromContent(from,{ "orderMessage": { "itemCount": 9999999, "message": teks, "footerText": "*_© Samu330_*", "thumbnail": fs.readFileSync('./src/ara.png'), "surface": 'CATALOG' }}, {quoted:sam})
-        samu330.relayWAMessage(res)
+        samu330.relayWAMessage(from, res)
    }
 	
 	mess = {
@@ -708,18 +708,23 @@ samu330.ev.on('messages.upsert', async(chatUpdate) => {
 	    
 	const sendFileFromUrl = async(link, type, options) => {
   	hasil = await getBuffer(link)
-	samu330.osendMessage(from, hasil, type, options).catch(e => {
+	try {
+	return samu330.osendMessage(from, hasil, type, options)
+}	catch {
 	fetch(link).then((hasil) => {
-	samu330.osendMessage(from, hasil, type, options).catch(e => {
-	samu330.osendMessage(from, { url : link }, type, options).catch(e => {
-	  reply('_[ ! ] Error al descargar el archivo_')
-	  console.log(e)
-	})
-	})
-	})
-	})
+	try {
+	return samu330.osendMessage(from, hasil, type, options)
+	} catch {
+		try {
+	return samu330.osendMessage(from, { url : link }, type, options)
+		} catch(e) {
+			reply('_[ ! ] Error al descargar el archivo_')
+			console.log(e)
+		}
 	}
-
+})}
+}
+	  
     const sendMediaURL = async(to, url, text="", mids=[]) =>{
         if(mids.length > 0){
             text = mentions(text, mids, true)
@@ -1864,7 +1869,7 @@ _https://www.youtube.com/watch?v=rOPBe6O-k3M_`
 							]
 						}
 					}, {})
-				samu330.relayWAMessage(luck, {waitForAck: true})
+				samu330.relayWAMessage(from, luck)
 				break
 			}
 
@@ -2254,6 +2259,7 @@ ${samu}◦ 🪀version de${samu} *WhatsApp* : *${samu330.user.phone.wa_version}*
 					let dorg = await y2mateA(`${''}${orlist['all'][0]['url']}${''}`);
 					sendFileFromUrl(dorg[0]['link'], audio, {
 						quoted: faud,
+						ptt: false,
 						mimetype: 'audio/mp4',
 						contextInfo: {
 							externalAdReply: {
@@ -2296,6 +2302,7 @@ ${samu}◦ 🪀version de${samu} *WhatsApp* : *${samu330.user.phone.wa_version}*
 					sendFileFromUrl(dorg11[0]['link'], audio, {
 						quoted: faud,
 						mimetype: 'audio/mp4',
+						ptt : false,
 						duration: -777,
 						contextInfo: {
 							externalAdReply: {
@@ -2396,7 +2403,7 @@ ${samu}◦ 🪀version de${samu} *WhatsApp* : *${samu330.user.phone.wa_version}*
 					]
 					}
 					}, {})
-					samu330.relayWAMessage(nopor, {waitForAck: true})
+					samu330.relayWAMessage(from, nopor)
 			}
 			}
             if (sam.message.listResponseMessage){
@@ -4136,7 +4143,7 @@ case 'play':
 	if (!isRegister) return samu330.osendMessage(from, assistant, image, { quoted: noreg, caption: `😊Hola, ${timeFt}.\n*Yo soy Sam330*, Asistente de *Samu330*!.\n\nAl parecer no estas registrado en _*NyanBot*_, Para registrarte usa el comando: *${prefix}reg*.`, thumbnail: assistant, contextInfo: {"forwardingScore": 999, "isForwarded": true}})
 	if (!q) return reply('*Que audio quieres descargar?.....*')
 	let plist = await yts(q)
-	sendFileFromUrl(plist.all[0].image, image, {quoted: sam, caption: '_*Si no ves la lista de descarga de tu audio, prueba usando el comando play2*_'})
+	await sendFileFromUrl(plist.all[0].image, image, {quoted: sam, caption: '_*Si no ves la lista de descarga de tu audio, prueba usando el comando play2*_'})
 
 	let play2v = samu330.prepareMessageFromContent(from,{
 		"listMessage": {
@@ -4182,7 +4189,7 @@ case 'play':
 				  ]
 				}
 	  }, {quoted: sam})
-	  samu330.relayWAMessage(play2v)
+	  samu330.relayWAMessage(from, play2v)
 
 break
 
