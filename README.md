@@ -25,9 +25,7 @@
 ```
 Atencion! Este bot aun esta en proceso de port, Por ahora presenta los siguientes problemas:
 
-1 Solo recibe 1 Mensaje y luego no recibe nada mas.
-
-2 Command Stickers no son detectados
+1 Command Stickers no son detectados
 
 Y quizas mas problemas.
 ```
