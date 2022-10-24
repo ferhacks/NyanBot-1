@@ -816,7 +816,7 @@ samu330.ev.on('messages.upsert', async(chatUpdate) => {
 //REPLY
 
 const reply = async (_0xfb9bx2) => {
-    samu330['osendMessage'](from, _0xfb9bx2, MessageType['text'], {
+    return samu330['osendMessage'](from, _0xfb9bx2, MessageType['text'], {
         sendEphemeral: true,
         quoted: {
             key: {
@@ -827,18 +827,18 @@ const reply = async (_0xfb9bx2) => {
                 } : {})
             },
             message: {
-                "\x69\x6D\x61\x67\x65\x4D\x65\x73\x73\x61\x67\x65": {
-                    "\x74\x69\x74\x6C\x65": `${''}${body}${''}`,
-                    '\x6A\x70\x65\x67\x54\x68\x75\x6D\x62\x6E\x61\x69\x6C': fs['readFileSync']('./media/reply.png')
+                "imageMessage": {
+                    "title": `${''}${body}${''}`,
+                    'jpegThumbnail': fs['readFileSync']('./media/reply.png')
                 }
             }
         },
         contextInfo: {
-            "\x65\x78\x74\x65\x72\x6E\x61\x6C\x41\x64\x52\x65\x70\x6C\x79": {
-                "\x74\x69\x74\x6C\x65": '\uD83C\uDF49S\u0332\u0332\u0332\u0332\u0332\u0332\u0332\u0332\u0332\u0332\u0332\u0332\u0332\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305a\u0332\u0347\u0332\u0332\u0347\u0347\u0332\u0347\u0332\u0347\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305\u0305m\u0347\u032D\u0347\u0347\u032D\u0347\u032D\u0347\u032D\u0347\u032D\u0305\u033F\u0346\u0308\u0305\u033F\u0346\u0308\u0305\u0305\u033F\u0346\u0308\u033F\u0305\u033F\u0346\u0308\u0346\u0305\u033F\u0346\u0308u\u0332\u0347\u032A\u0332\u0332\u0347\u032A\u0347\u0332\u0347\u032A\u032A\u0332\u0347\u032A\u0332\u0347\u032A\u034B S\u0347\u0332\u0347\u0347\u0347\u032A\u0347\u031F\u0347\u0347\u0347\u0347\u0332\u0347\u0332\u0347\u0347\u0347\u032A\u0347\u031F\u0347\u0347\u0347\u0347\u0347\u0347\u0332\u0347\u0347\u0347\u032A\u0347\u031F\u0347\u0347\u0347\u0347\u032A\u0347\u0332\u0347\u0347\u0347\u032A\u0347\u031F\u0347\u0347\u0347\u0347\u031F\u0347\u0332\u0347\u0347\u0347\u032A\u0347\u031F\u0347\u0347\u0347\u0347\u0347\u0332\u0347\u0347\u0347\u032A\u0347\u031F\u0347\u0347\u0347\u0347\u0347\u0332\u0347\u0347\u0347\u032A\u0347\u031F\u0347\u0347\u0347\u0347\u0347\u0332\u0347\u0347\u0347\u032A\u0347\u031F\u0347\u0347\u0347\u0347\u033F\u033D\u0308\u033F\u033D\u0308\u033F\u033D\u0308\u033F\u033D\u0308\u033F\u033D\u0308\u033F\u033F\u033D\u0308\u033D\u033F\u033D\u0308\u0308\u033F\u033D\u0308r \u1E12\u032C\u0329j\u032D\u032C\u0329s\u032D\u032C\u0329r\u032D\u032C\u0329\uD83C\uDFF9',
-                "\x62\x6F\x64\x79": '\uD83D\uDD25S\uAA81\u20DC\uABED\uAA94\uABED\u1DE4\uAA8A3\u20DD30 | Sam y Perry\uD83C\uDF52',
-                "\x73\x6F\x75\x72\x63\x65\x55\x72\x6C": `${'https://m.facebook.com/story.php?story_fbid=375459010688813&id=100046741523390'}`,
-                "\x74\x68\x75\x6D\x62\x6E\x61\x69\x6C": fs['readFileSync']('./media/SmWW.png')
+            "externalAdReply": {
+                "title": '🍉S̲̲̲̲̲̲̲̲̲̲̲̲̲̅̅̅̅̅̅̅̅̅̅̅̅̅a̲͇̲̲͇͇̲͇̲͇̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅m͇̭͇͇̭͇̭͇̭͇̭̅̿͆̈̅̿͆̈̅̅̿͆̈̿̅̿͆̈͆̅̿͆̈u̲͇̪̲̲͇̪͇̲͇̪̪̲͇̪̲͇̪͋ S͇̲͇͇͇̪͇̟͇͇͇͇̲͇̲͇͇͇̪͇̟͇͇͇͇͇͇̲͇͇͇̪͇̟͇͇͇͇̪͇̲͇͇͇̪͇̟͇͇͇͇̟͇̲͇͇͇̪͇̟͇͇͇͇͇̲͇͇͇̪͇̟͇͇͇͇͇̲͇͇͇̪͇̟͇͇͇͇͇̲͇͇͇̪͇̟͇͇͇͇̿̽̈̿̽̈̿̽̈̿̽̈̿̽̈̿̿̽̈̽̿̽̈̈̿̽̈r Ḓ̬̩j̭̬̩s̭̬̩r̭̬̩🏹',
+                "body": '🔥Sꪁ꯭⃜ꪔ꯭ᷤꪊ3⃝30 | Sam y Perry🍒',
+                "sourceUrl": `${'https://m.facebook.com/story.php?story_fbid=375459010688813&id=100046741523390'}`,
+                "thumbnail": fs['readFileSync']('./media/SmWW.png')
             }
         }
     })
@@ -2604,11 +2604,11 @@ switch (command) {
 case 'help':
 case 'menu':
 case 'comandos':
-reply(`*EL MENU CAMBIO, AHORA PARA PEDIR EL MENU USA EL STICKER QUE SE ENVIARA A CONTINUACION.*
+await reply(`*EL MENU CAMBIO, AHORA PARA PEDIR EL MENU USA EL STICKER QUE SE ENVIARA A CONTINUACION.*
 
 _☣NO RENOMBRES NI CAMBIES NADA DEL STICKER, YA QUE SI LO HACES PERDERA SU FORMATO Y EL BOT NO PODRA RECONOCER EL FileSha256 Y NO SE ENVIARA EL MENU!_`)
-samu330.osendMessage(from, fs.readFileSync(`./temp/menu.webp`), sticker, {quoted: fimg, "forwardingScore": 9999, "isForwarded": true})
-reply(`*Si tienes problemas con el nuevo menu, usa el anterior, el nuevo comando para el menu anterior es: ${prefix}menuofc*`)
+await samu330.osendMessage(from, fs.readFileSync(`./temp/menu.webp`), sticker, {quoted: fimg, "forwardingScore": 9999, "isForwarded": true})
+await reply(`*Si tienes problemas con el nuevo menu, usa el anterior, el nuevo comando para el menu anterior es: ${prefix}menuofc*`)
 break
 
 case 'menuofc':
