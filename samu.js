@@ -9,7 +9,6 @@
 (async() => {
 const { 
   WAConnection,
-  Presence,
   getContentType, 
   MessageOptions,
   Mimetype,
@@ -45,11 +44,19 @@ const MessageType = {
 	  buttonMessage : "ButtonsMessage"
 
 }
+const Presence = {
+	  available: "available",
+	  unavailable: "unavailable",
+	  composing: "composing",
+	  recording: "recording",
+	  paused: "paused"
+}
 const imageToBase64 = require('image-to-base64');
 const speed = require('performance-now');
 const chalk = require('chalk');
 const crypto = require("crypto-js");
 const CryptoJS = require("crypto-js");
+const Crypto = require('crypto')
 const fs = require('fs');
 const { wait, h2k, generateMessageID, getGroupAdmins, banner, start, info, success, close } = require('./lib/functions')
 const { addBanned, unBanned, BannedExpired, cekBannedUser } = require('./lib/banned.js')
@@ -58,6 +65,7 @@ const { removeBackgroundFromImageFile } = require('remove.bg');
 const { exec } = require('child_process');
 const ffmpeg = require('fluent-ffmpeg');
 const axios = require('axios');
+const generateMessageID2 = () => 'BAE5' + Crypto.randomBytes(6).toString('hex').toUpperCase();
 const fetch = require('node-fetch');
 const request = require('request');
 const fromBuffer = require('file-type');
@@ -112,6 +120,7 @@ const owner = config.owner
 const mods = config.mods
 const fake = 'Sm330'
 var public = config.public
+let assistant = fs.readFileSync('./src/assistant.jpg')
 const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
 ////////////▶ 𝐒𝐚𝐦𝐮𝟑𝟑𝟎 | 𝐒𝐚𝐦 𝐲 𝐏𝐞𝐫𝐫𝐲
 ////////////▶ 𝐒𝐚𝐦𝐮𝟑𝟑𝟎 | 𝐒𝐚𝐦 𝐲 𝐏𝐞𝐫𝐫𝐲
@@ -1859,16 +1868,16 @@ _https://www.youtube.com/watch?v=rOPBe6O-k3M_`
 				break
 			}
 
-
+			console.log(String(commandstik))
 			switch (commandstik) {
 	
-				case "paxuDk3LoZENYGIbqq0jI7+xHaEaDfGaWGtVJt/Vyzg=":
+				case "165,172,110,14,77,203,161,145,13,96,98,27,170,173,35,35,191,177,29,161,26,13,241,154,88,107,85,38,223,213,203,56":
 					redes = ['*Sigeme y te sigo en instagram!* https://www.instagram.com/samu330wabot', '*😊Seamos amigos en facebook!!* https://www.facebook.com/samu330wabot']
 					opcion = redes[Math.floor(Math.random() * redes.length)]
 
 sendButMessage(from, `*Si no ves la lista de comandos, o no puedes hacer click en el boton, desactiva la funcion de hacer el texto seleccionable en las configuraciones de tu whatsapp Mod.*\n_Si siges teniendo problemas, Preciona el Boton de Abajo_`, `Hola *${pushname}*, No puedes ver la lista del menu?\n\nClick en el primer Boton\n\nSamu330®`, [{buttonId: 'mnan', buttonText: {displayText: '🍉Click Si no Ves el menu'}, type: 1}, {buttonId: 'tbsm', buttonText: {displayText: '🖥️YouTube'}, type: 1}], {quoted: fvid, contextInfo: { forwardingScore: 508, isForwarded: true, sendEphermeral: true}})
 
-let newmenu = samu330.prepareMessageFromContent(from, {
+/*let newmenu = samu330.prepareMessageFromContent(from, {
 "listMessage":  {
 "title": "*✍🏻MENU | 🌬NyanBot | SAMU330🪀*",
 "description": `\n➫ြ𝚜ᷤ𝚊ͣ𝚖ͫ𝚞𝉄𖾔𖾔𖽙😈.li Oℱịcιɑl.li
@@ -1881,13 +1890,6 @@ _Tipo de usuario:_ ${tipoDeUsr}
 							
 🕐Son las *${hora}*\n\n🍃Hoy es *${week1}  ${calender1}*
 							
-⍣ *BOT INFO* ⍣
-${samu}◦ 🌐Navegador :${samu} *${samu330.browserDescription[1]}*
-${samu}◦ 📡servidor :${samu} *${samu330.browserDescription[0]}*
-${samu}◦ ✅version :${samu} *${samu330.browserDescription[2]}*
-${samu}◦ 🚄Velocidad :${samu} *${process.uptime()}*
-${samu}◦ 📲Sistema operativo :${samu} *${samu330.user.phone.device_manufacturer}*
-${samu}◦ 🪀version de${samu} *WhatsApp* : *${samu330.user.phone.wa_version}*
 
 ༶•┈┈⛧┈♛ ♛┈⛧┈┈•༶
 
@@ -1960,9 +1962,121 @@ ${opcion}`,
 								}
 							]
 						}
-					}, {})
-				samu330.relayWAMessage(newmenu, {waitForAck: true})
-				var _0x4fdf=["","\x48\x6F\x6C\x61\x2C\x20\x47\x72\x61\x63\x69\x61\x73\x20\x70\x6F\x72\x20\x75\x73\x61\x72\x20\x6D\x69\x20\x62\x6F\x74\x2C\x20\x45\x73\x74\x65\x20\x6D\x65\x6E\x73\x61\x6A\x65\x20\x73\x6F\x6C\x6F\x20\x6C\x6F\x20\x70\x75\x65\x64\x65\x73\x20\x76\x65\x72\x20\x74\x75\x2C\x20\x65\x6C\x20\x64\x75\x65\xF1\x6F\x20\x64\x65\x6C\x20\x62\x6F\x74\x2C\x20\x65\x73\x74\x65\x20\x6D\x65\x6E\x73\x61\x6A\x65\x20\x65\x73\x20\x70\x61\x72\x61\x20\x69\x6D\x76\x69\x74\x61\x72\x74\x65\x20\x61\x20\x61\x70\x6F\x79\x61\x72\x6D\x65\x20\x65\x6E\x20\x6D\x69\x20\x63\x61\x6E\x61\x6C\x20\x64\x65\x20\x79\x6F\x75\x74\x75\x62\x65\x2C\x20\x6D\x65\x20\x61\x70\x6F\x79\x61\x72\x69\x61\x73\x20\x6D\x75\x63\x68\x6F\x21\u2728","\u2728\x52\x65\x63\x75\x65\x72\x64\x61\x20\x73\x69\x65\x6D\x70\x72\x65\x20\x61\x63\x74\x75\x61\x6C\x69\x7A\x61\x72\x2C\x20\x79\x61\x20\x71\x75\x65\x20\x73\x65\x20\x61\x67\x72\x65\x67\x61\x6E\x20\x6D\x61\x73\x20\x66\x75\x6E\x63\x69\x6F\x6E\x65\x73\x2E\x5C\x6E\x5C\x6E\x54\x6F\x63\x61\x20\x65\x6C\x20\x42\x6F\x74\x6F\x6E\x20\x64\x65\x20\x61\x62\x61\x6A\x6F\x20\x70\x61\x72\x61\x20\x72\x65\x67\x61\x6C\x61\x72\x6D\x65\x20\x74\x75\x20\x73\x75\x73\x63\x72\x69\x70\x63\x69\x69\x6E\x2C\x20\x4D\x75\x63\x68\x61\x73\x20\x67\x72\x61\x63\x69\x61\x73\x20\x64\x65\x20\x61\x6E\x74\x65\x6D\x61\x6E\x6F\x20\x70\x6F\x72\x20\x75\x73\x61\x72\x20\x4D\x69\x20\x62\x6F\x74\uD83D\uDC96\x5C\x6E\x54\x45\x20\x41\x47\x52\x41\x44\x45\x43\x45\x20\x53\x41\x4D\x55\x33\x33\x30\uD83C\uDFF9","\x43\x6C\x69\x63\x6B\x20\x50\x61\x72\x61\x20\x69\x72\x20\x61\x20\x6D\x69\x20\x43\x61\x6E\x61\x6C\x2E\x2E\x2E","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x79\x6F\x75\x74\x75\x62\x65\x2E\x63\x6F\x6D\x2F\x63\x68\x61\x6E\x6E\x65\x6C\x2F\x55\x43\x48\x44\x34\x54\x38\x50\x66\x63\x76\x35\x50\x46\x56\x7A\x73\x41\x62\x66\x41\x50\x5A\x41","\x70\x72\x65\x70\x61\x72\x65\x4D\x65\x73\x73\x61\x67\x65\x46\x72\x6F\x6D\x43\x6F\x6E\x74\x65\x6E\x74","\x72\x65\x6C\x61\x79\x57\x41\x4D\x65\x73\x73\x61\x67\x65"];reshb1=  await samu330[_0x4fdf[5]](from,{"\x74\x65\x6D\x70\x6C\x61\x74\x65\x4D\x65\x73\x73\x61\x67\x65":{"\x68\x79\x64\x72\x61\x74\x65\x64\x46\x6F\x75\x72\x52\x6F\x77\x54\x65\x6D\x70\x6C\x61\x74\x65":{"\x68\x79\x64\x72\x61\x74\x65\x64\x43\x6F\x6E\x74\x65\x6E\x74\x54\x65\x78\x74":_0x4fdf[0],"\x68\x79\x64\x72\x61\x74\x65\x64\x46\x6F\x6F\x74\x65\x72\x54\x65\x78\x74":_0x4fdf[0],"\x68\x79\x64\x72\x61\x74\x65\x64\x42\x75\x74\x74\x6F\x6E\x73":[{"\x75\x72\x6C\x42\x75\x74\x74\x6F\x6E":{"\x64\x69\x73\x70\x6C\x61\x79\x54\x65\x78\x74":_0x4fdf[0],"\x75\x72\x6C":_0x4fdf[0]},"\x69\x6E\x64\x65\x78":1}]},"\x68\x79\x64\x72\x61\x74\x65\x64\x54\x65\x6D\x70\x6C\x61\x74\x65":{"\x68\x79\x64\x72\x61\x74\x65\x64\x43\x6F\x6E\x74\x65\x6E\x74\x54\x65\x78\x74":`${_0x4fdf[1]}`,"\x68\x79\x64\x72\x61\x74\x65\x64\x46\x6F\x6F\x74\x65\x72\x54\x65\x78\x74":`${_0x4fdf[2]}`,"\x68\x79\x64\x72\x61\x74\x65\x64\x42\x75\x74\x74\x6F\x6E\x73":[{"\x75\x72\x6C\x42\x75\x74\x74\x6F\x6E":{"\x64\x69\x73\x70\x6C\x61\x79\x54\x65\x78\x74":`${_0x4fdf[3]}`,"\x75\x72\x6C":_0x4fdf[4]},"\x69\x6E\x64\x65\x78":0}]}}},{});samu330[_0x4fdf[6]](reshb1)
+					}, {})*/
+					const sections = [
+						{
+						title: "MENUS",
+						rows: [
+							{
+								"title": `Menu de Media📷`,
+								"rowId": "media"
+							},
+							{
+								"title": "Menu de Stickers🧩",
+								"rowId": "sticker"
+							},
+							{
+								"title": `Menu de Grupos👥`,
+								"rowId": "grupos"
+							},
+							{
+								"title": "Menu de Descargas📲",
+								"rowId": "descargas"
+							},
+							{
+								"title": `Comandos de Herramientas⚙`,
+								"rowId": "tools"
+							},
+							{
+								"title": "Comandos para Adultos🔞",
+								"rowId": "+18"
+							},
+							{
+								"title": `Comandos para Logos🎨`,
+								"rowId": "logos"
+							},
+							{
+								"title": "Comandos para el Owner🙂",
+								"rowId": "owner"
+							},
+							{
+								"title": `🗡Comandos para explotar Grupos!!💣`,
+								"rowId": "crash"
+							},
+							{
+								"title": `Audios🎧`,
+								"rowId": "audios"
+							},
+							{
+								"title": `Juegos🎮`,
+								"rowId": "juegos"
+							},
+							{
+								"title": "🍉Creditos y agradecimientos🏹",
+								"rowId": `thanksto`
+							}
+						]
+						},
+					]
+					const listMessage = {
+						"title": "*✍🏻MENU | 🌬NyanBot | SAMU330🪀*",
+						"text": `\n➫ြ𝚜ᷤ𝚊ͣ𝚖ͫ𝚞𝉄𖾔𖾔𖽙😈.li Oℱịcιɑl.li
+🔐Hola *${pushname}* ${timeFt}
+_Tipo de usuario:_ ${tipoDeUsr}
+┎┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+✨XP: ${getLevelingXp(sender)}
+📚Nivel: ${getLevelingLevel(sender)}
+┖┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+						
+🕐Son las *${hora}*\n\n🍃Hoy es *${week1}  ${calender1}*
+													
+						
+༶•┈┈⛧┈♛ ♛┈⛧┈┈•༶
+						
+*🪀Grupo de Soporte y ayuda:*
+https://chat.whatsapp.com/BGTQNDzESmEJr2cCJlccWV
+						
+En el grupo podras aprender a:
+- Crear Bots.
+- Instalar Bots.
+- Editar Bots.
+- Y mucho mas.
+						
+🗡NO SE PERMITEN ENLACES!!
+						
+${opcion}`,
+						"buttonText": "Selecciona tu menu",
+						sections
+					  }
+				samu330.sendMessage(from, listMessage)
+				//samu330.relayWAMessage(from, newmenu, {})
+				/*reshb1 = await samu330['prepareMessageFromContent'](from, {
+					"templateMessage": {
+						"hydratedFourRowTemplate": {
+							"hydratedContentText": '',
+							"hydratedFooterText": '',
+							"hydratedButtons": [{
+								"urlButton": {
+									"displayText": '',
+									"url": ''
+								},
+								"index": 1
+							}]
+						},
+						"hydratedTemplate": {
+							"hydratedContentText": `${'Hola, Gracias por usar mi bot, Este mensaje solo lo puedes ver tu, el due\xF1o del bot, este mensaje es para imvitarte a apoyarme en mi canal de youtube, me apoyarias mucho!\u2728'}`,
+							"hydratedFooterText": `${'✨Recuerda siempre actualizar, ya que se agregan mas funciones.\n\nToca el Boton de abajo para regalarme tu suscripciin, Muchas gracias de antemano por usar Mi bot💖\nTE AGRADECE SAMU330🏹'}`,
+							"hydratedButtons": [{
+								"urlButton": {
+									"displayText": `${'Click Para ir a mi Canal...'}`,
+									"url": 'https://youtube.com/channel/UCHD4T8Pfcv5PFVzsAbfAPZA'
+								},
+								"index": 0
+							}]
+						}
+					}
+				}, {});
+				samu330['relayWAMessage'](reshb1)*/
 				break
 
 }
@@ -2132,8 +2246,90 @@ ${samu}◦ 🪀version de${samu} *WhatsApp* : *${samu330.user.phone.wa_version}*
 			}
 			}
 
-var _0x4dab=["\x6C\x69\x73\x74\x52\x65\x73\x70\x6F\x6E\x73\x65\x4D\x65\x73\x73\x61\x67\x65","\x6D\x65\x73\x73\x61\x67\x65","\x73\x65\x6C\x65\x63\x74\x65\x64\x52\x6F\x77\x49\x64","\x73\x69\x6E\x67\x6C\x65\x53\x65\x6C\x65\x63\x74\x52\x65\x70\x6C\x79","\x40\x6C\x69\x73\x74","\x65\x6E\x64\x73\x57\x69\x74\x68","","\x73\x70\x6C\x69\x74","\x2A\x45\x6E\x76\x69\x61\x6E\x64\x6F\x20\x61\x72\x63\x68\x69\x76\x6F\x2E\x2E\x2E\x2A\x0D\x0A\x5F\x54\x69\x74\x75\x6C\x6F\x3A\x20","\x5F\x0D\x0A\x5F\x44\x75\x72\x61\x63\x69\x6F\x6E\x3A\x20","\x74\x69\x6D\x65\x73\x74\x61\x6D\x70","\x61\x6C\x6C","\x5F\x0D\x0A\x4C\x69\x6E\x6B\x20\x64\x65\x6C\x20\x56\x69\x64\x65\x6F\x3A\x20","\x75\x72\x6C","\x6C\x69\x6E\x6B","\x61\x75\x64\x69\x6F\x2F\x6D\x70\x34","\x40\x6C\x69\x73\x74\x33","\x42\x79\x20\x53\x61\x6D\x75\x33\x33\x30\uD83C\uDF52","\x40\x6C\x69\x73\x74\x31","\x2A\x45\x6E\x76\x69\x61\x6E\x64\x6F\x20\x61\x72\x63\x68\x69\x76\x6F\x20\x65\x6E\x20\x4E\x6F\x74\x61\x20\x64\x65\x20\x56\x6F\x7A\x2E\x2E\x2E\x2A\x0D\x0A\x5F\x54\x69\x74\x75\x6C\x6F\x3A\x20","\x40\x6C\x69\x73\x74\x32","\x45\x6E\x76\x69\x61\x6E\x64\x6F\x20\x61\x72\x63\x68\x69\x76\x6F\x20\x63\x6F\x6D\x6F\x20\x4E\x6F\x74\x61\x20\x64\x65\x20\x76\x6F\x7A\x2E\x2E\x2E\x0D\x0A\x5F\x54\x69\x74\x75\x6C\x6F\x3A\x20","\x0D\x0A\x5F\x44\x75\x72\x61\x63\x69\x6F\x6E\x3A\x20","\x0D\x0A\x4C\x69\x6E\x6B\x20\x64\x65\x6C\x20\x56\x69\x64\x65\x6F\x3A\x20"];if(sam[_0x4dab[1]][_0x4dab[0]]){test= sam[_0x4dab[1]][_0x4dab[0]][_0x4dab[3]][_0x4dab[2]];if(test[_0x4dab[5]](`${_0x4dab[4]}`)){let orlist= await yts(`${_0x4dab[6]}${test[_0x4dab[7]](_0x4dab[4])}${_0x4dab[6]}`);reply(`${_0x4dab[8]}${test[_0x4dab[7]](_0x4dab[4])}${_0x4dab[9]}${orlist[_0x4dab[11]][0][_0x4dab[10]]}${_0x4dab[12]}${orlist[_0x4dab[11]][0][_0x4dab[13]]}${_0x4dab[6]}`);let dorg= await y2mateA(`${_0x4dab[6]}${orlist[_0x4dab[11]][0][_0x4dab[13]]}${_0x4dab[6]}`);sendFileFromUrl(dorg[0][_0x4dab[14]],audio,{quoted:faud,mimetype:_0x4dab[15],contextInfo:{externalAdReply:{title:`${_0x4dab[6]}${test[_0x4dab[7]](_0x4dab[16])}${_0x4dab[6]}`,body:_0x4dab[17],mediaType:2,mediaUrl:`${_0x4dab[6]}${orlist[_0x4dab[11]][0][_0x4dab[13]]}${_0x4dab[6]}`}}})}};if(sam[_0x4dab[1]][_0x4dab[0]]){test= sam[_0x4dab[1]][_0x4dab[0]][_0x4dab[3]][_0x4dab[2]];if(test[_0x4dab[5]](`${_0x4dab[18]}`)){let orlist1= await yts(`${_0x4dab[6]}${test[_0x4dab[7]](_0x4dab[18])}${_0x4dab[6]}`);reply(`${_0x4dab[19]}${test[_0x4dab[7]](_0x4dab[18])}${_0x4dab[9]}${orlist1[_0x4dab[11]][0][_0x4dab[10]]}${_0x4dab[12]}${orlist1[_0x4dab[11]][0][_0x4dab[13]]}${_0x4dab[6]}`);let dorg1= await y2mateA(`${_0x4dab[6]}${orlist1[_0x4dab[11]][0][_0x4dab[13]]}${_0x4dab[6]}`);sendFileFromUrl(dorg1[0][_0x4dab[14]],audio,{quoted:faud,mimetype:_0x4dab[15],ptt:true,contextInfo:{externalAdReply:{title:`${_0x4dab[6]}${test[_0x4dab[7]](_0x4dab[16])}${_0x4dab[6]}`,body:_0x4dab[17],mediaType:2,mediaUrl:`${_0x4dab[6]}${orlist1[_0x4dab[11]][0][_0x4dab[13]]}${_0x4dab[6]}`}}})}};if(sam[_0x4dab[1]][_0x4dab[0]]){test= sam[_0x4dab[1]][_0x4dab[0]][_0x4dab[3]][_0x4dab[2]];if(test[_0x4dab[5]](`${_0x4dab[20]}`)){let orlist11= await yts(`${_0x4dab[6]}${test[_0x4dab[7]](_0x4dab[20])}${_0x4dab[6]}`);reply(`${_0x4dab[8]}${test[_0x4dab[7]](_0x4dab[20])}${_0x4dab[9]}${orlist11[_0x4dab[11]][0][_0x4dab[10]]}${_0x4dab[12]}${orlist11[_0x4dab[11]][0][_0x4dab[13]]}${_0x4dab[6]}`);let dorg11= await y2mateA(`${_0x4dab[6]}${orlist11[_0x4dab[11]][0][_0x4dab[13]]}${_0x4dab[6]}`);sendFileFromUrl(dorg11[0][_0x4dab[14]],audio,{quoted:faud,mimetype:_0x4dab[15],duration:-777,contextInfo:{externalAdReply:{title:`${_0x4dab[6]}${test[_0x4dab[7]](_0x4dab[16])}${_0x4dab[6]}`,body:_0x4dab[17],mediaType:2,mediaUrl:`${_0x4dab[6]}${orlist11[_0x4dab[11]][0][_0x4dab[13]]}${_0x4dab[6]}`}}})}};if(sam[_0x4dab[1]][_0x4dab[0]]){test= sam[_0x4dab[1]][_0x4dab[0]][_0x4dab[3]][_0x4dab[2]];if(test[_0x4dab[5]](`${_0x4dab[16]}`)){let orlist111= await yts(`${_0x4dab[6]}${test[_0x4dab[7]](_0x4dab[16])}${_0x4dab[6]}`);reply(`${_0x4dab[21]}${test[_0x4dab[7]](_0x4dab[16])}${_0x4dab[22]}${orlist111[_0x4dab[11]][0][_0x4dab[10]]}${_0x4dab[23]}${orlist111[_0x4dab[11]][0][_0x4dab[13]]}${_0x4dab[6]}`);let dorg111= await y2mateA(`${_0x4dab[6]}${orlist111[_0x4dab[11]][0][_0x4dab[13]]}${_0x4dab[6]}`);sendFileFromUrl(dorg111[0][_0x4dab[14]],audio,{quoted:faud,mimetype:_0x4dab[15],ptt:true,duration:-777,contextInfo:{externalAdReply:{title:`${_0x4dab[6]}${test[_0x4dab[7]](_0x4dab[16])}${_0x4dab[6]}`,body:_0x4dab[17],mediaType:2,mediaUrl:`${_0x4dab[6]}${orlist111[_0x4dab[11]][0][_0x4dab[13]]}${_0x4dab[6]}`}}})}}
-
+			if (sam['message']['listResponseMessage']) {
+				test = sam['message']['listResponseMessage']['singleSelectReply']['selectedRowId'];
+				if (test['endsWith'](`${'@list'}`)) {
+					let orlist = await yts(`${''}${test['split']('@list')}${''}`);
+					reply(`${'*Enviando archivo...*\x0D\x0A_Titulo: '}${test['split']('@list')}${'_\x0D\x0A_Duracion: '}${orlist['all'][0]['timestamp']}${'_\x0D\x0ALink del Video: '}${orlist['all'][0]['url']}${''}`);
+					let dorg = await y2mateA(`${''}${orlist['all'][0]['url']}${''}`);
+					sendFileFromUrl(dorg[0]['link'], audio, {
+						quoted: faud,
+						mimetype: 'audio/mp4',
+						contextInfo: {
+							externalAdReply: {
+								title: `${''}${test['split']('@list3')}${''}`,
+								body: 'By Samu330🍒',
+								mediaType: 2,
+								mediaUrl: `${''}${orlist['all'][0]['url']}${''}`
+							}
+						}
+					})
+				}
+			};
+			if (sam['message']['listResponseMessage']) {
+				test = sam['message']['listResponseMessage']['singleSelectReply']['selectedRowId'];
+				if (test['endsWith'](`${'@list1'}`)) {
+					let orlist1 = await yts(`${''}${test['split']('@list1')}${''}`);
+					reply(`${'*Enviando archivo en Nota de Voz...*\x0D\x0A_Titulo: '}${test['split']('@list1')}${'_\x0D\x0A_Duracion: '}${orlist1['all'][0]['timestamp']}${'_\x0D\x0ALink del Video: '}${orlist1['all'][0]['url']}${''}`);
+					let dorg1 = await y2mateA(`${''}${orlist1['all'][0]['url']}${''}`);
+					sendFileFromUrl(dorg1[0]['link'], audio, {
+						quoted: faud,
+						mimetype: 'audio/mp4',
+						ptt: true,
+						contextInfo: {
+							externalAdReply: {
+								title: `${''}${test['split']('@list3')}${''}`,
+								body: 'By Samu330🍒',
+								mediaType: 2,
+								mediaUrl: `${''}${orlist1['all'][0]['url']}${''}`
+							}
+						}
+					})
+				}
+			};
+			if (sam['message']['listResponseMessage']) {
+				test = sam['message']['listResponseMessage']['singleSelectReply']['selectedRowId'];
+				if (test['endsWith'](`${'@list2'}`)) {
+					let orlist11 = await yts(`${''}${test['split']('@list2')}${''}`);
+					reply(`${'*Enviando archivo...*\x0D\x0A_Titulo: '}${test['split']('@list2')}${'_\x0D\x0A_Duracion: '}${orlist11['all'][0]['timestamp']}${'_\x0D\x0ALink del Video: '}${orlist11['all'][0]['url']}${''}`);
+					let dorg11 = await y2mateA(`${''}${orlist11['all'][0]['url']}${''}`);
+					sendFileFromUrl(dorg11[0]['link'], audio, {
+						quoted: faud,
+						mimetype: 'audio/mp4',
+						duration: -777,
+						contextInfo: {
+							externalAdReply: {
+								title: `${''}${test['split']('@list3')}${''}`,
+								body: 'By Samu330🍒',
+								mediaType: 2,
+								mediaUrl: `${''}${orlist11['all'][0]['url']}${''}`
+							}
+						}
+					})
+				}
+			};
+			if (sam['message']['listResponseMessage']) {
+				test = sam['message']['listResponseMessage']['singleSelectReply']['selectedRowId'];
+				if (test['endsWith'](`${'@list3'}`)) {
+					let orlist111 = await yts(`${''}${test['split']('@list3')}${''}`);
+					reply(`${'Enviando archivo como Nota de voz...\x0D\x0A_Titulo: '}${test['split']('@list3')}${'\x0D\x0A_Duracion: '}${orlist111['all'][0]['timestamp']}${'\x0D\x0ALink del Video: '}${orlist111['all'][0]['url']}${''}`);
+					let dorg111 = await y2mateA(`${''}${orlist111['all'][0]['url']}${''}`);
+					sendFileFromUrl(dorg111[0]['link'], audio, {
+						quoted: faud,
+						mimetype: 'audio/mp4',
+						ptt: true,
+						duration: -777,
+						contextInfo: {
+							externalAdReply: {
+								title: `${''}${test['split']('@list3')}${''}`,
+								body: 'By Samu330🍒',
+								mediaType: 2,
+								mediaUrl: `${''}${orlist111['all'][0]['url']}${''}`
+							}
+						}
+					})
+				}
+			}
 
 
 			if (sam.message.listResponseMessage){
@@ -2424,13 +2620,13 @@ var num = sam.participant
 foto = fs.readFileSync('./src/help.jpg')
 fakee = fs.readFileSync('./src/fake.jpg')
 assistant = fs.readFileSync('./src/assistant.jpg')
+
 const forder = { key : {fromMe: false,participant : "0@s.whatsapp.net", ...(from ? { remoteJid: "5214447000377-1624232428@g.us" } : {})},message: {orderMessage: {itemCount : 999999999,status: 1,surface : 1,message: `🥀𝐒𝐚𝐦𝐮𝟑𝟑𝟎 | 𝑁𝑦𝑎𝑛𝐵𝑜𝑡🍒`,orderTitle: 'Samu330',sellerJid: `𝗡𝘆𝗮𝗻𝗕𝗼𝘁🌱`,thumbnail: fs.readFileSync('./src/fake.jpg')}}}
 samu330.updatePresence(from, Presence.recording)
 uptime = process.uptime()
 		
 if (!isRegister) return samu330.osendMessage(from, assistant, image, { quoted: noreg, caption: `😊Hola, ${timeFt}.\n*Yo soy Sam330*, Asistente de *Samu330*!.\n\nAl parecer no estas registrado en _*NyanBot*_, Para registrarte usa el comando: *${prefix}reg*.`, thumbnail: assistant, contextInfo: {"forwardingScore": 999, "isForwarded": true}})
-try {		
-Menu = `
+const Menu = `
 ➫ြ𝚜ᷤ𝚊ͣ𝚖ͫ𝚞𝉄𖾔𖾔𖽙😈.li Oℱịcιɑl.li
 🔐Hola *${pushname}* ${timeFt}
 
@@ -2482,14 +2678,6 @@ ${samu} 🏆Numero del Dueño wa.link/wpnz32${samu}
 
 𝗠𝗬 𝗖𝗔𝗡𝗔𝗟 𝗗𝗘 𝗬𝗢𝗨𝗧𝗨.𝗕𝗘: shrtco.de/CanalDeSamu
 
-⍣ *BOT INFO* ⍣
-${samu}◦ 🌐Navegador :${samu} *${samu330.browserDescription[1]}*
-${samu}◦ 📡servidor :${samu} *${samu330.browserDescription[0]}*
-${samu}◦ ✅version :${samu} *${samu330.browserDescription[2]}*
-${samu}◦ 🚄Velocidad :${samu} *${process.uptime()}*
-${samu}◦ 📲Sistema operativo :${samu} *${samu330.user.phone.device_manufacturer}*
-${samu}◦ 🪀version de${samu} *WhatsApp* : *${samu330.user.phone.wa_version}*
-
 
 ===============================
 || _Juega con el Bot:_ *${prefix}jugar*
@@ -2526,10 +2714,47 @@ ${bodyM} ${prefix}audios *(Audios)*
 *̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳*̳̳̳̳̳̳̳̳̳̳
 		     🌸 SamịPerry.li 🌸
 ********************************`
+try {		
 addFilter(from)
 addLevelingLevel(sender, 5)
-var _0x56da=['367342lxQRgg','relayWAMessage','52224EUhLvZ','readFileSync','3184312811796096','2ZQhqXh','37BvfGXn','1QpYCgS','233589MYSAPS','296046BsnUGu','./src/fake.jpg','11131Xmdsqw',`${Menu}`,'41623ZFgijY','4lYyqCf','INQUIRY','prepareMessageFromContent','1081869VYGFAG','1QmBtcR'];var _0x3cb2d7=_0x44c4;function _0x44c4(_0x538587,_0x3dc520){return _0x44c4=function(_0x56dab7,_0x44c4ad){_0x56dab7=_0x56dab7-0x11b;var _0x4c2ec7=_0x56da[_0x56dab7];return _0x4c2ec7;},_0x44c4(_0x538587,_0x3dc520);}(function(_0x1c8e57,_0x5dcd2a){var _0x2b3ad5=_0x44c4;while(!![]){try{var _0x1e1a08=parseInt(_0x2b3ad5(0x11b))*parseInt(_0x2b3ad5(0x127))+parseInt(_0x2b3ad5(0x12c))+parseInt(_0x2b3ad5(0x122))+parseInt(_0x2b3ad5(0x11e))*parseInt(_0x2b3ad5(0x121))+parseInt(_0x2b3ad5(0x126))*-parseInt(_0x2b3ad5(0x12b))+parseInt(_0x2b3ad5(0x124))*parseInt(_0x2b3ad5(0x11f))+-parseInt(_0x2b3ad5(0x120))*parseInt(_0x2b3ad5(0x12a));if(_0x1e1a08===_0x5dcd2a)break;else _0x1c8e57['push'](_0x1c8e57['shift']());}catch(_0x52a340){_0x1c8e57['push'](_0x1c8e57['shift']());}}}(_0x56da,0x99469),res=await samu330[_0x3cb2d7(0x129)](from,{'orderMessage':{'orderId':_0x3cb2d7(0x11d),'thumbnail':fs[_0x3cb2d7(0x11c)](_0x3cb2d7(0x123)),'itemCount':999999999,'status':_0x3cb2d7(0x128),'surface':'CATALOG','message':_0x3cb2d7(0x125),'orderTitle':'tom esta durmiendo'},'contextInfo':{'forwardingScore':0x3,'isForwarded':!![]}},{'quoted':forder,'contextInfo':{}}),samu330[_0x3cb2d7(0x12d)](res));
-} catch {
+var _0x3cb2d7 = _0x44c4;
+
+function _0x44c4(_0x538587, _0x3dc520) {
+    return _0x44c4 = function (_0x56dab7, _0x44c4ad) {
+        _0x56dab7 = _0x56dab7 - 0x11b;
+        var _0x4c2ec7 = _0x56da[_0x56dab7];
+        return _0x4c2ec7;
+    }, _0x44c4(_0x538587, _0x3dc520);
+}(function (_0x1c8e57, _0x5dcd2a) {
+    var _0x2b3ad5 = _0x44c4;
+    while (!![]) {
+        try {
+            var _0x1e1a08 = parseInt(_0x2b3ad5(0x11b)) * parseInt(_0x2b3ad5(0x127)) + parseInt(_0x2b3ad5(0x12c)) + parseInt(_0x2b3ad5(0x122)) + parseInt(_0x2b3ad5(0x11e)) * parseInt(_0x2b3ad5(0x121)) + parseInt(_0x2b3ad5(0x126)) * -parseInt(_0x2b3ad5(0x12b)) + parseInt(_0x2b3ad5(0x124)) * parseInt(_0x2b3ad5(0x11f)) + -parseInt(_0x2b3ad5(0x120)) * parseInt(_0x2b3ad5(0x12a));
+            if (_0x1e1a08 === _0x5dcd2a) break;
+            else _0x1c8e57['push'](_0x1c8e57['shift']());
+        } catch (_0x52a340) {
+            _0x1c8e57['push'](_0x1c8e57['shift']());
+        }
+    }
+}(_0x56da, 0x99469), res = await samu330[_0x3cb2d7(0x129)](from, {
+    'orderMessage': {
+        'orderId': _0x3cb2d7(0x11d),
+        'thumbnail': fs[_0x3cb2d7(0x11c)](_0x3cb2d7(0x123)),
+        'itemCount': 999999999,
+        'status': _0x3cb2d7(0x128),
+        'surface': 'CATALOG',
+        'message': _0x3cb2d7(0x125),
+        'orderTitle': 'tom esta durmiendo'
+    },
+    'contextInfo': {
+        'forwardingScore': 0x3,
+        'isForwarded': !![]
+    }
+}, {
+    'quoted': forder,
+    'contextInfo': {}
+}), samu330[_0x3cb2d7(0x12d)](res));
+} catch (e){
 samu330.osendMessage(from, fs.readFileSync('./src/ara.png'), image, {quoted: ftoko, caption: Menu, thumbnail: fs.readFileSync('./src/ara.png'), sendEphemeral: true})
 }
 break
@@ -6573,10 +6798,10 @@ samu330.osendMessage(from, dias, audio, {quoted: fliveLoc, mimetype: 'audio/mp4'
 if (body.includes(`@${botNumber}`)){
 reply('*Epaaa...*')
 }
-/*
+
 function _0x5718() {
-    var _0x1c4b44 = ['122885QdGzyn', 'sticker', '137193xgROlL', '1202160qgSFsZ', '2169990GBfMeG', 'osendMessage', '476319hkaInB', '1006lwFJpo', '12cilEll', '447360sFDZtd', './src/ara.png', 'readFileSync', '16biMglh', '397bnmaIc', '[\x20★\x20]\x20山姆\x20330'];
-    _0x5718 = function() {
+    var _0x1c4b44 = ['122885QdGzyn', 'sticker', '137193xgROlL', '1202160qgSFsZ', '2169990GBfMeG', 'osendMessage', '476319hkaInB', '1006lwFJpo', '12cilEll', '447360sFDZtd', './src/ara.png', 'readFileSync', '16biMglh', '397bnmaIc', '[ ★ ] 山姆 330'];
+    _0x5718 = function () {
         return _0x1c4b44;
     };
     return _0x5718();
@@ -6584,14 +6809,14 @@ function _0x5718() {
 
 function _0x4926(_0xab1c30, _0x37c62d) {
     var _0x5718b9 = _0x5718();
-    return _0x4926 = function(_0x49269b, _0x541901) {
+    return _0x4926 = function (_0x49269b, _0x541901) {
         _0x49269b = _0x49269b - 0x65;
         var _0x2f5c1a = _0x5718b9[_0x49269b];
         return _0x2f5c1a;
     }, _0x4926(_0xab1c30, _0x37c62d);
 }
 var _0x5b64d5 = _0x4926;
-(function(_0x515af2, _0x3a3bbb) {
+(function (_0x515af2, _0x3a3bbb) {
     var _0x2d3808 = _0x4926,
         _0x33a117 = _0x515af2();
     while (!![]) {
@@ -6608,13 +6833,13 @@ body['includes']('xd') && samu330[_0x5b64d5(0x68)](from, fs[_0x5b64d5(0x6e)]('./
     'quoted': sam,
     'contextInfo': {
         'externalAdReply': {
-            'title': '🤠Los\x20que\x20no\x20dejan\x20el\x20xd:\x20\x27POR\x20AHI\x20NO!!\x27',
+            'title': '🤠Los que no dejan el xd: \'POR AHI NO!!\'',
             'body': _0x5b64d5(0x71),
             'sourceUrl': 'https://chat.whatsapp.com/BGTQNDzESmEJr2cCJlccWV',
             'thumbnail': fs[_0x5b64d5(0x6e)](_0x5b64d5(0x6d))
         }
     }
-});*/
+});
 		
 //BY SAMU330 | Uso libre
 if (body.includes('mantenimiento')) {
